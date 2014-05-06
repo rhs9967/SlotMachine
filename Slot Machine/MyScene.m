@@ -7,8 +7,11 @@
 //
 
 #import "MyScene.h"
+#import "GameModel.h"
 
 @implementation MyScene{
+    GameModel *_gameModel;
+    
     SKSpriteNode *_overlay;
     SKSpriteNode *_leftReel;
     SKSpriteNode *_middleReel;
@@ -94,8 +97,16 @@
         [self spinReel: _leftReel];
         [self spinReel: _middleReel];
         [self spinReel: _rightReel];
-       // [self spinReel:middle];
-        //[self spinReel:right];
+        
+        
+        // TO DO //
+        // Check if touch is on lever
+        
+        
+        // Check where on lever player is touching
+        
+        // Inform GameModel
+        
         
         /*
         CGPoint location = [touch locationInNode:self];
@@ -125,5 +136,20 @@
     //[reel runAction:[SKAction repeatActionForever:reelAction]];
     
 }
+
+#pragma mark - Notifications
+/*-(void) handleNotificationGameDidEnd:(NSNotification *)notification{
+    NSDictionary *userInfo = notification.userInfo;
+    NSNumber *num = userInfo[@"winnings"]; // the key for the dictionary
+    NSString *message = @"Winnings: %f", [num intValue];
+    
+    UIAlertView *alert = [[UIAlertView alloc]
+                          initWithTitle:@"GameOver"
+                          message:message
+                          delegate:self
+                          cancelButtonTitle:Nil
+                          otherButtonTitles:@"Play Again", nil];
+    [alert show];
+}*/
 
 @end

@@ -29,6 +29,7 @@
 		3F65B4FD19156D4600AC931E /* reelSpin.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F65B4FC19156D4600AC931E /* reelSpin.png */; };
 		3F65B4FF1915722B00AC931E /* Reel.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3F65B4FE1915722B00AC931E /* Reel.atlas */; };
 		3FA9EB2119195D9F00C2D587 /* GameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA9EB2019195D9F00C2D587 /* GameModel.m */; };
+		3FA9EB2419195EB600C2D587 /* Lever.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA9EB2319195EB600C2D587 /* Lever.m */; };
 		DAF94FF31919425D002BE1B9 /* 7.png in Resources */ = {isa = PBXBuildFile; fileRef = DAF94FEE1919425D002BE1B9 /* 7.png */; };
 		DAF94FF41919425D002BE1B9 /* Bar.png in Resources */ = {isa = PBXBuildFile; fileRef = DAF94FEF1919425D002BE1B9 /* Bar.png */; };
 		DAF94FF51919425D002BE1B9 /* Bell.png in Resources */ = {isa = PBXBuildFile; fileRef = DAF94FF01919425D002BE1B9 /* Bell.png */; };
@@ -78,6 +79,8 @@
 		3F65B4FE1915722B00AC931E /* Reel.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Reel.atlas; sourceTree = "<group>"; };
 		3FA9EB1F19195D9F00C2D587 /* GameModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameModel.h; sourceTree = "<group>"; };
 		3FA9EB2019195D9F00C2D587 /* GameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameModel.m; sourceTree = "<group>"; };
+		3FA9EB2219195EB600C2D587 /* Lever.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lever.h; sourceTree = "<group>"; };
+		3FA9EB2319195EB600C2D587 /* Lever.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Lever.m; sourceTree = "<group>"; };
 		DAF94FEE1919425D002BE1B9 /* 7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 7.png; sourceTree = "<group>"; };
 		DAF94FEF1919425D002BE1B9 /* Bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bar.png; sourceTree = "<group>"; };
 		DAF94FF01919425D002BE1B9 /* Bell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bell.png; sourceTree = "<group>"; };
@@ -157,6 +160,8 @@
 				3F65B4D01915613900AC931E /* MyScene.m */,
 				3FA9EB1F19195D9F00C2D587 /* GameModel.h */,
 				3FA9EB2019195D9F00C2D587 /* GameModel.m */,
+				3FA9EB2219195EB600C2D587 /* Lever.h */,
+				3FA9EB2319195EB600C2D587 /* Lever.m */,
 				3F65B4F11915655F00AC931E /* TitleScene.h */,
 				3F65B4F21915655F00AC931E /* TitleScene.m */,
 				3F65B4D41915613900AC931E /* Images.xcassets */,
@@ -326,6 +331,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3FA9EB2419195EB600C2D587 /* Lever.m in Sources */,
 				3F65B4F31915655F00AC931E /* TitleScene.m in Sources */,
 				DAF94FFD19194381002BE1B9 /* Reel.m in Sources */,
 				3F65B4D11915613900AC931E /* MyScene.m in Sources */,

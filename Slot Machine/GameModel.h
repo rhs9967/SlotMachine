@@ -7,7 +7,21 @@
 //
 
 #import <SpriteKit/SpriteKit.h>
+#import "Lever.h"
+#import "Reel.h"
+
+static NSString *kNotificationGameDidEnd = @"kNotificationGameDidEnd";
+
+typedef enum : int{
+    kGameStagePlayer,
+    kGameStageSpin,
+    kGameStageResult
+}kGameStage;
 
 @interface GameModel : SKNode
+@property (nonatomic) kGameStage gameStage;
+
+-(void)updateGameStage;
+-(void)pullLever:(float)distance;
 
 @end
