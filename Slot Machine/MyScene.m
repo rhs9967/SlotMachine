@@ -122,6 +122,7 @@
     SKAction *reelAction = [SKAction animateWithTextures:_reelTextures timePerFrame:0.1];
     //[_leftReel runAction:[SKAction sequence:@[reelAction, remove]]];
     [reel runAction:reelAction];
+    //[reel runAction:[SKAction repeatActionForever:reelAction]];
     
 }
 

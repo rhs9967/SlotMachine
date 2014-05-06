@@ -9,5 +9,15 @@
 #import <SpriteKit/SpriteKit.h>
 
 @interface Reel : SKNode
+{
+    NSMutableArray *_reelNodes; //used for images
+    NSMutableArray *_NodeNumbers; //used to check for payout
+}
+
+-(id)init;
+
+-(void)update:(CGFloat)dt;
+
+-(NSMutableArray *)createReel;
 
 @end

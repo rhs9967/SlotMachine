@@ -28,6 +28,12 @@
 		3F65B4FB191569F100AC931E /* Spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F65B4FA191569F100AC931E /* Spaceship.png */; };
 		3F65B4FD19156D4600AC931E /* reelSpin.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F65B4FC19156D4600AC931E /* reelSpin.png */; };
 		3F65B4FF1915722B00AC931E /* Reel.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3F65B4FE1915722B00AC931E /* Reel.atlas */; };
+		DAF94FF31919425D002BE1B9 /* 7.png in Resources */ = {isa = PBXBuildFile; fileRef = DAF94FEE1919425D002BE1B9 /* 7.png */; };
+		DAF94FF41919425D002BE1B9 /* Bar.png in Resources */ = {isa = PBXBuildFile; fileRef = DAF94FEF1919425D002BE1B9 /* Bar.png */; };
+		DAF94FF51919425D002BE1B9 /* Bell.png in Resources */ = {isa = PBXBuildFile; fileRef = DAF94FF01919425D002BE1B9 /* Bell.png */; };
+		DAF94FF61919425D002BE1B9 /* Cherry.png in Resources */ = {isa = PBXBuildFile; fileRef = DAF94FF11919425D002BE1B9 /* Cherry.png */; };
+		DAF94FF71919425D002BE1B9 /* Watermelon.png in Resources */ = {isa = PBXBuildFile; fileRef = DAF94FF21919425D002BE1B9 /* Watermelon.png */; };
+		DAF94FFD19194381002BE1B9 /* Reel.m in Sources */ = {isa = PBXBuildFile; fileRef = DAF94FFC19194381002BE1B9 /* Reel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +75,13 @@
 		3F65B4FA191569F100AC931E /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spaceship.png; sourceTree = "<group>"; };
 		3F65B4FC19156D4600AC931E /* reelSpin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reelSpin.png; sourceTree = "<group>"; };
 		3F65B4FE1915722B00AC931E /* Reel.atlas */ = {isa = PBXFileReference; lastKnownFileType = folder.skatlas; path = Reel.atlas; sourceTree = "<group>"; };
+		DAF94FEE1919425D002BE1B9 /* 7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 7.png; sourceTree = "<group>"; };
+		DAF94FEF1919425D002BE1B9 /* Bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bar.png; sourceTree = "<group>"; };
+		DAF94FF01919425D002BE1B9 /* Bell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bell.png; sourceTree = "<group>"; };
+		DAF94FF11919425D002BE1B9 /* Cherry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cherry.png; sourceTree = "<group>"; };
+		DAF94FF21919425D002BE1B9 /* Watermelon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Watermelon.png; sourceTree = "<group>"; };
+		DAF94FFB19194381002BE1B9 /* Reel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reel.h; sourceTree = "<group>"; };
+		DAF94FFC19194381002BE1B9 /* Reel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,6 +143,8 @@
 		3F65B4BD1915613900AC931E /* Slot Machine */ = {
 			isa = PBXGroup;
 			children = (
+				DAF94FFB19194381002BE1B9 /* Reel.h */,
+				DAF94FFC19194381002BE1B9 /* Reel.m */,
 				3F65B4C61915613900AC931E /* AppDelegate.h */,
 				3F65B4C71915613900AC931E /* AppDelegate.m */,
 				3F65B4C91915613900AC931E /* Main.storyboard */,
@@ -178,6 +193,7 @@
 		3F65B4F7191569DC00AC931E /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				DAF94FED1919422B002BE1B9 /* reel_Images */,
 				3F65B4FE1915722B00AC931E /* Reel.atlas */,
 				3F65B4FC19156D4600AC931E /* reelSpin.png */,
 				3F65B4FA191569F100AC931E /* Spaceship.png */,
@@ -185,6 +201,18 @@
 			);
 			name = Images;
 			path = Images.xcassets/Images;
+			sourceTree = "<group>";
+		};
+		DAF94FED1919422B002BE1B9 /* reel_Images */ = {
+			isa = PBXGroup;
+			children = (
+				DAF94FEE1919425D002BE1B9 /* 7.png */,
+				DAF94FEF1919425D002BE1B9 /* Bar.png */,
+				DAF94FF01919425D002BE1B9 /* Bell.png */,
+				DAF94FF11919425D002BE1B9 /* Cherry.png */,
+				DAF94FF21919425D002BE1B9 /* Watermelon.png */,
+			);
+			name = reel_Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,11 +293,16 @@
 			files = (
 				3F65B4FF1915722B00AC931E /* Reel.atlas in Resources */,
 				3F65B4C21915613900AC931E /* InfoPlist.strings in Resources */,
+				DAF94FF51919425D002BE1B9 /* Bell.png in Resources */,
 				3F65B4FD19156D4600AC931E /* reelSpin.png in Resources */,
+				DAF94FF41919425D002BE1B9 /* Bar.png in Resources */,
 				3F65B4D51915613900AC931E /* Images.xcassets in Resources */,
 				3F65B4F9191569DC00AC931E /* slotmachine-symbol-overlay.png in Resources */,
 				3F65B4FB191569F100AC931E /* Spaceship.png in Resources */,
 				3F65B4CB1915613900AC931E /* Main.storyboard in Resources */,
+				DAF94FF61919425D002BE1B9 /* Cherry.png in Resources */,
+				DAF94FF31919425D002BE1B9 /* 7.png in Resources */,
+				DAF94FF71919425D002BE1B9 /* Watermelon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -289,6 +322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F65B4F31915655F00AC931E /* TitleScene.m in Sources */,
+				DAF94FFD19194381002BE1B9 /* Reel.m in Sources */,
 				3F65B4D11915613900AC931E /* MyScene.m in Sources */,
 				3F65B4CE1915613900AC931E /* ViewController.m in Sources */,
 				3F65B4C81915613900AC931E /* AppDelegate.m in Sources */,
@@ -505,6 +539,7 @@
 				3F65B4ED1915613900AC931E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3F65B4EE1915613900AC931E /* Build configuration list for PBXNativeTarget "Slot MachineTests" */ = {
 			isa = XCConfigurationList;
@@ -513,6 +548,7 @@
 				3F65B4F01915613900AC931E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

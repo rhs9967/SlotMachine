@@ -10,4 +10,27 @@
 
 @implementation Reel
 
+-(id)init
+{
+    {
+        self = [super init];
+    }
+    
+    //setup standard images
+    
+    return self;
+}
+
+-(void)update:(CGFloat)dt
+{
+    
+    
+}
+
+-(NSMutableArray *)createReel
+{
+    
+    return nil;
+}
+
 @end
