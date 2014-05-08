@@ -43,7 +43,8 @@ static int const kNumOnReel = 5;
         //move other sprites down
         for(int j = 1; j<i; j++)
         {
-            //[_reelNodes[j] position] = CGPointMake(0, ([_reelNodes[j] position].y + [_reelNodes[0] size].height));
+            SKSpriteNode *Node = (SKSpriteNode *)_reelNodes[j];
+            Node.position = CGPointMake(0, (Node.position.y + Node.size.height));
         }
     }
     return nil;
