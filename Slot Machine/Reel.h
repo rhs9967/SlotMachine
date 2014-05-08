@@ -11,13 +11,20 @@
 @interface Reel : SKNode
 {
     NSMutableArray *_reelNodes; //used for images
-    NSMutableArray *_NodeNumbers; //used to check for payout
 }
 
+@property NSMutableArray *nodeNumbers; //used to check for payout
+
+
+//set up
 -(id)init;
-
--(void)update:(CGFloat)dt;
-
 -(NSMutableArray *)createReel;
+
+//gameplay
+-(void)update:(CGFloat)dt;
+-(void)createNode;
+
+//utilities
+-(CGFloat)getRandomFloatBetween:(CGFloat)from to:(CGFloat)to;
 
 @end
