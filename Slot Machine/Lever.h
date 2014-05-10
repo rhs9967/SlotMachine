@@ -15,5 +15,6 @@
 
 // public instance methods
 - (BOOL) isPulledFar;
+- (void) createParts;
 
 @end

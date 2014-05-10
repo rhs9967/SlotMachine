@@ -8,9 +8,11 @@
 
 #import "MyScene.h"
 #import "GameModel.h"
+#import "Lever.h"
 
 @implementation MyScene{
     GameModel *_gameModel;
+    Lever *_lever;
     
     SKSpriteNode *_overlay;
     SKSpriteNode *_leftReel;
@@ -25,7 +27,19 @@
         
         self.backgroundColor = [SKColor colorWithRed:0.0 green:0.4 blue:0.0 alpha:1.0];
         
+        // make gameModel
+        _gameModel = [[GameModel alloc] init];
+        _lever = [[Lever alloc] init];
+        
+        // continue setup
         [self setup];
+        
+        // register for kNotificationGameDidEnd notification
+        [[NSNotificationCenter defaultCenter]
+         addObserver:self
+         selector:@selector(handleNotificationGameDidEnd:)
+         name:kNotificationGameDidEnd
+         object:_gameModel];
         
         /*
         SKLabelNode *myLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
@@ -83,6 +97,13 @@
     _rightReel.zPosition = -1;
     _rightReel.position = right;
     [self addChild:_rightReel];
+    
+    // add lever
+    CGPoint leverPos = CGPointMake(_overlay.position.x*2, _overlay.position.y);
+    _lever.position = leverPos;
+    [_lever createParts];
+    [self addChild:_lever];
+    
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -138,18 +159,18 @@
 }
 
 #pragma mark - Notifications
-/*-(void) handleNotificationGameDidEnd:(NSNotification *)notification{
-    NSDictionary *userInfo = notification.userInfo;
-    NSNumber *num = userInfo[@"winnings"]; // the key for the dictionary
-    NSString *message = @"Winnings: %f", [num intValue];
+-(void) handleNotificationGameDidEnd:(NSNotification *)notification{
+    //NSDictionary *userInfo = notification.userInfo;
+    //NSNumber *num = userInfo[@"winnings"]; // the key for the dictionary
+    //NSString *message = [NSString (@"Winnings: %f", num)];//NSString(@"Winnings: %f", [num intValue]);
     
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:@"GameOver"
-                          message:message
+                          message:Nil // message
                           delegate:self
                           cancelButtonTitle:Nil
                           otherButtonTitles:@"Play Again", nil];
     [alert show];
-}*/
+}
 
 @end

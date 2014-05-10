@@ -60,6 +60,12 @@
     }
 } // end updateGameStage
 
+-(Lever*)getLever{
+    return _lever;
+}
+
+// private
+
 -(void) notifyGameDidEnd{
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     

@@ -23,5 +23,6 @@ typedef enum : int{
 
 -(void)updateGameStage;
 -(void)pullLever:(float)distance;
+-(Lever*)getLever;
 
 @end
