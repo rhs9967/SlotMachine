@@ -15,9 +15,13 @@
     Lever *_lever;
     
     SKSpriteNode *_overlay;
-    SKSpriteNode *_leftReel;
-    SKSpriteNode *_middleReel;
-    SKSpriteNode *_rightReel;
+    //SKSpriteNode *_leftReel;
+    //SKSpriteNode *_middleReel;
+    //SKSpriteNode *_rightReel;
+    Reel *_leftReel;
+    Reel *_middleReel;
+    Reel *_rightReel;
+    
     NSMutableArray *_reelTextures;
 }
 
@@ -76,14 +80,18 @@
     }
     
     // setup reels
-    _leftReel = [SKSpriteNode spriteNodeWithTexture:[_reelTextures objectAtIndex:0]];
-    _middleReel = [SKSpriteNode spriteNodeWithTexture:[_reelTextures objectAtIndex:5]];
-    _rightReel = [SKSpriteNode spriteNodeWithTexture:[_reelTextures objectAtIndex:10]];
+    //_leftReel = [SKSpriteNode spriteNodeWithTexture:[_reelTextures objectAtIndex:0]];
+    //_middleReel = [SKSpriteNode spriteNodeWithTexture:[_reelTextures objectAtIndex:5]];
+    //_rightReel = [SKSpriteNode spriteNodeWithTexture:[_reelTextures objectAtIndex:10]];
+    _leftReel = [[Reel alloc] init];
+    _middleReel = [[Reel alloc] init];
+    _rightReel = [[Reel alloc] init];
+    
     
     // positions
-    CGPoint left = CGPointMake(_overlay.position.x - _overlay.size.width/3, _overlay.position.y);
-    CGPoint middle = CGPointMake(_overlay.position.x, _overlay.position.y);
-    CGPoint right = CGPointMake(_overlay.position.x + _overlay.size.width/3, _overlay.position.y);
+    CGPoint left = CGPointMake(_overlay.position.x - _overlay.size.width/3, _overlay.position.y-230);
+    CGPoint middle = CGPointMake(_overlay.position.x, _overlay.position.y-230);
+    CGPoint right = CGPointMake(_overlay.position.x + _overlay.size.width/3, _overlay.position.y-230);
     
     // place reels
     _leftReel.zPosition = -1;
@@ -97,6 +105,7 @@
     _rightReel.zPosition = -1;
     _rightReel.position = right;
     [self addChild:_rightReel];
+    
     
     // add lever
     CGPoint leverPos = CGPointMake(_overlay.position.x*2, _overlay.position.y);
@@ -115,9 +124,9 @@
         //CGPoint touchPos = [touch locationInNode:self];
         
         
-        [self spinReel: _leftReel];
-        [self spinReel: _middleReel];
-        [self spinReel: _rightReel];
+        //[self spinReel: _leftReel];
+        //[self spinReel: _middleReel];
+        //[self spinReel: _rightReel];
         
         
         // TO DO //

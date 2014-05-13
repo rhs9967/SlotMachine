@@ -41,16 +41,22 @@ static int const kNumOnReel = 5;
         //create the node
         [self createNode];
         //move other sprites down
-        for(int j = 1; j<i; j++)
+        for(int j = 1; j<=i; j++)
         {
             SKSpriteNode *Node = (SKSpriteNode *)_reelNodes[j];
             Node.position = CGPointMake(0, (Node.position.y + Node.size.height));
         }
     }
+    for (int i = 0; i< kNumOnReel; i++)
+    {
+        SKSpriteNode *Node = (SKSpriteNode *)_reelNodes[i];
+        NSLog(@"Position i:%d x:%f y:%f", i,Node.position.x, Node.position.y);
+        [self addChild:Node];
+    }
     return nil;
 }
 
-//create a new node
+//create a new node at position 0
 -(void)createNode
 {
     //randomized image
