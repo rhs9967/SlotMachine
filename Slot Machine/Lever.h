@@ -10,11 +10,15 @@
 
 @interface Lever : SKNode
 
-@property (nonatomic) float distance;
+@property (nonatomic) double leverWidth;
+@property (nonatomic) double leverHeight;
+@property (nonatomic) double distance;
 @property (nonatomic) BOOL isLetGo;
 
 // public instance methods
+- (BOOL) isWithinBounds:(CGPoint)touch;
 - (BOOL) isPulledFar;
-- (void) createParts;
+- (void) createParts:(double)width :(double)height;
+- (void) update;
 
 @end

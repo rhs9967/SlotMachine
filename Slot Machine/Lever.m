@@ -15,16 +15,32 @@
 }
 
 // public methods //
+-(BOOL)isWithinBounds:(CGPoint)touch{
+    // check x
+    //if (touch.x <= ) {
+    //    <#statements#>
+    //}
+    return NO;
+}
+
 -(BOOL)isPulledFar{
     if (self.distance >= 0.75) return YES;
     return NO;
 }
 
--(void)createParts{
+-(void)createParts:(double)width :(double)height{
+    // Properties
+    _leverWidth = width;
+    _leverHeight = height;
+    
     // CGRects
-    CGRect baseRect = CGRectMake(0, 0, 30, 100);
-    CGRect handleRect = CGRectMake(10, 50, 10, 50);
-    CGRect knobCircle = CGRectMake(0, 100, 30, 30);
+    //CGRect baseRect = CGRectMake(0, 0, 90, 300);
+    //CGRect handleRect = CGRectMake(30, 150, 30, 150);
+    //CGRect knobCircle = CGRectMake(0, 275, 90, 90);
+    
+    CGRect baseRect = CGRectMake(0, 0, _leverWidth, _leverHeight);
+    CGRect handleRect = CGRectMake(_leverWidth/3, _leverHeight/2, _leverWidth/3, _leverHeight/2);
+    CGRect knobCircle = CGRectMake(0, _leverHeight-(_leverWidth/3), _leverWidth, _leverWidth);
     
     // base
     _base = [[SKShapeNode alloc] init];
@@ -49,6 +65,25 @@
     [self addChild:_handle];
     [self addChild:_knob];
     
+}
+
+-(void)update{
+    // knob //
+    // move knob to touch location's .y (distance)
+    double newKnobHeight = (_leverHeight-(_leverWidth/3)) - _distance;
+    // set new CGRect
+    CGRect newKnobCircle = CGRectMake(0, newKnobHeight, _leverWidth, _leverWidth);
+    _knob.path = [UIBezierPath bezierPathWithRect:newKnobCircle].CGPath;
+    
+    // handle //
+    // adjust handle height based on knob's distance from base center
+    double maxKnobHeight = _leverHeight-(_leverWidth/3);
+    double baseCenter = _leverHeight/2;
+    double newHandleLength;
+    // if knob is above center
+    if (newKnobHeight >= baseCenter) {
+        newHandleLength = baseCenter * ((newKnobHeight-baseCenter)/(maxKnobHeight-baseCenter));
+    }
 }
 
 @end

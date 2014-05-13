@@ -108,9 +108,9 @@
     
     
     // add lever
-    CGPoint leverPos = CGPointMake(_overlay.position.x*2, _overlay.position.y);
+    CGPoint leverPos = CGPointMake(_overlay.position.x*2, _overlay.position.y-150);
     _lever.position = leverPos;
-    [_lever createParts];
+    [_lever createParts:90:300];
     [self addChild:_lever];
     
 }
@@ -121,7 +121,7 @@
     for (UITouch *touch in touches) {
         
         // get touch position
-        //CGPoint touchPos = [touch locationInNode:self];
+        //CGPoint location = [touch locationInNode:self];
         
         
         //[self spinReel: _leftReel];
@@ -130,8 +130,18 @@
         
         
         // TO DO //
-        // Check if touch is on lever
-        
+        // Check if touch location is on lever
+        // location.x
+        /*
+        if (location.x <= _lever.position.x && location.x >= _lever.position.x + _lever.leverWidth) {
+            // location.y
+            if (location.y >= _lever.position.y && location.y <= _lever.position.y + _lever.leverHeight) {
+                // touch is on lever //
+                // move lever knob to location.y
+                _lever.distance = (_lever.position.y + _lever.leverHeight) - location.y;
+            }
+        }
+        */
         
         // Check where on lever player is touching
         
