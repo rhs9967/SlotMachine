@@ -22,7 +22,5 @@ typedef enum : int{
 @property (nonatomic) kGameStage gameStage;
 
 -(void)updateGameStage;
--(void)pullLever:(float)distance;
--(Lever*)getLever;
 
 @end

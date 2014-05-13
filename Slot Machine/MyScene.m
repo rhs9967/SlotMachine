@@ -23,6 +23,8 @@
     Reel *_rightReel;
     
     NSMutableArray *_reelTextures;
+    
+    BOOL _leverTouched;
 }
 
 -(id)initWithSize:(CGSize)size {    
@@ -121,32 +123,21 @@
     for (UITouch *touch in touches) {
         
         // get touch position
-        //CGPoint location = [touch locationInNode:self];
-        
+        CGPoint location = [touch locationInNode:self];
+        //NSLog(@"Touch = (%f, %f)",location.x, location.y);
         
         //[self spinReel: _leftReel];
         //[self spinReel: _middleReel];
         //[self spinReel: _rightReel];
         
         
-        // TO DO //
-        // Check if touch location is on lever
-        // location.x
-        /*
-        if (location.x <= _lever.position.x && location.x >= _lever.position.x + _lever.leverWidth) {
-            // location.y
-            if (location.y >= _lever.position.y && location.y <= _lever.position.y + _lever.leverHeight) {
-                // touch is on lever //
-                // move lever knob to location.y
-                _lever.distance = (_lever.position.y + _lever.leverHeight) - location.y;
-            }
+        // Check if touch location is on lever and if in player gamestage
+        if ([_lever containsPoint:location] && _gameModel.gameStage == kGameStagePlayer) {
+            _leverTouched = YES;
+            _lever.distance = (_lever.position.y + _lever.leverHeight) - location.y;
+        } else {
+            _leverTouched = NO;
         }
-        */
-        
-        // Check where on lever player is touching
-        
-        // Inform GameModel
-        
         
         /*
         CGPoint location = [touch locationInNode:self];
@@ -164,8 +155,53 @@
     }
 }
 
+- (void) touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    for (UITouch *touch in touches) {
+        
+        //UITouch* touch = [touches anyObject];
+        CGPoint location = [touch locationInNode:self];
+        
+        if ([_lever containsPoint:location] && _leverTouched) {
+            _lever.distance = (_lever.position.y + _lever.leverHeight) - location.y;
+        }
+        
+    }
+}
+
+- (void) touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    for (UITouch *touch in touches) {
+        
+        //UITouch* touch = [touches anyObject];
+        CGPoint location = [touch locationInNode:self];
+        
+        // if player is still touching lever area
+        if (location.x >= _lever.position.x && location.x <= _lever.position.x + _lever.leverWidth && _leverTouched) {
+            // if lever was pulled far, set lever to down position and end stage
+            if ([_lever isPulledFar]) {
+                // set lever down
+                _lever.distance = _lever.leverHeight;
+                
+                // end stage
+                
+                _gameModel.gameStage = kGameStageSpin;
+                
+                return;
+            }
+        }
+        
+        // lever is reset if touch is let go outside lever or was not pulled far (during player gamestage)
+        if (_gameModel.gameStage == kGameStagePlayer) {
+            _lever.distance = 0;
+        }
+    }
+}
+
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
+    [_gameModel updateGameStage];
+    [_lever update];
 }
 
 -(void)spinReel:(SKSpriteNode*)reel{

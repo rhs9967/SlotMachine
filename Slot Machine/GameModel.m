@@ -10,43 +10,31 @@
 
 @implementation GameModel{
     //private ivars
-    Lever *_lever;
     NSMutableArray *_reels;
     int _amount;
 }
 
 // public
--(void)pullLever:(float)distance{
-    _lever.distance = distance;
-}
-
 -(void)updateGameStage{
     // Game logic //
     
     // Player stage
     if (_gameStage == kGameStagePlayer) {
-        // if touch detected, see if it's on the lever
         
-            // if so, calculate distance from lever top to touch and pull lever
-        
-        // if player let go of lever & lever is pulled far enough
-        if (_lever.isLetGo & [_lever isPulledFar]) {
-            // move on to spin stage
-            _gameStage = kGameStageSpin;
-            return;
-        }
         return;
     } // end player stage
     
     // Spin stage
     if (_gameStage == kGameStageSpin) {
+        NSLog(@"GameModel - GameStageSpin Active: SPINNING!");
+        
         // if reels have actions, continue // SKNode
         
         // if reels don't have actions
             // if weren't spun, begin actions
         
             // else, move on to results stage
-            _gameStage = kGameStageResult;
+            //_gameStage = kGameStageResult;
             return;
     } // end spin stage
     
@@ -60,12 +48,7 @@
     }
 } // end updateGameStage
 
--(Lever*)getLever{
-    return _lever;
-}
-
 // private
-
 -(void) notifyGameDidEnd{
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     

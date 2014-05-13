@@ -13,7 +13,6 @@
 @property (nonatomic) double leverWidth;
 @property (nonatomic) double leverHeight;
 @property (nonatomic) double distance;
-@property (nonatomic) BOOL isLetGo;
 
 // public instance methods
 - (BOOL) isWithinBounds:(CGPoint)touch;

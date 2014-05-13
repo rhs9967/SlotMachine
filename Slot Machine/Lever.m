@@ -24,7 +24,7 @@
 }
 
 -(BOOL)isPulledFar{
-    if (self.distance >= 0.75) return YES;
+    if (_distance/_leverHeight >= 0.75) return YES;
     return NO;
 }
 
@@ -39,8 +39,8 @@
     //CGRect knobCircle = CGRectMake(0, 275, 90, 90);
     
     CGRect baseRect = CGRectMake(0, 0, _leverWidth, _leverHeight);
-    CGRect handleRect = CGRectMake(_leverWidth/3, _leverHeight/2, _leverWidth/3, _leverHeight/2);
-    CGRect knobCircle = CGRectMake(0, _leverHeight-(_leverWidth/3), _leverWidth, _leverWidth);
+    //CGRect handleRect = CGRectMake(_leverWidth/3, _leverHeight/2, _leverWidth/3, _leverHeight/2);
+    //CGRect knobCircle = CGRectMake(0, _leverHeight-(_leverWidth/3), _leverWidth, _leverWidth);
     
     // base
     _base = [[SKShapeNode alloc] init];
@@ -50,13 +50,13 @@
     
     // handle
     _handle = [[SKShapeNode alloc] init];
-    _handle.path = [UIBezierPath bezierPathWithRect:handleRect].CGPath;
+    //_handle.path = [UIBezierPath bezierPathWithRect:handleRect].CGPath;
     _handle.fillColor = SKColor.whiteColor;
     _handle.strokeColor = SKColor.blackColor;
     
     // knob
     _knob = [[SKShapeNode alloc] init];
-    _knob.path = [UIBezierPath bezierPathWithOvalInRect:knobCircle].CGPath;
+    //_knob.path = [UIBezierPath bezierPathWithOvalInRect:knobCircle].CGPath;
     _knob.fillColor = SKColor.redColor;
     _knob.strokeColor = SKColor.blackColor;
     
@@ -68,22 +68,43 @@
 }
 
 -(void)update{
-    // knob //
-    // move knob to touch location's .y (distance)
-    double newKnobHeight = (_leverHeight-(_leverWidth/3)) - _distance;
-    // set new CGRect
-    CGRect newKnobCircle = CGRectMake(0, newKnobHeight, _leverWidth, _leverWidth);
-    _knob.path = [UIBezierPath bezierPathWithRect:newKnobCircle].CGPath;
-    
-    // handle //
-    // adjust handle height based on knob's distance from base center
-    double maxKnobHeight = _leverHeight-(_leverWidth/3);
-    double baseCenter = _leverHeight/2;
-    double newHandleLength;
-    // if knob is above center
-    if (newKnobHeight >= baseCenter) {
-        newHandleLength = baseCenter * ((newKnobHeight-baseCenter)/(maxKnobHeight-baseCenter));
+    if (_distance < 0) {
+        return;
     }
+    // Scale up
+    //_overlay.xScale = 1.5;
+    //_overlay.yScale = 1.5;
+    
+    // move knob to touch location's .y (distance)
+    double maxKnobHeight = _leverHeight-(_leverWidth/2);
+    double newKnobHeight = maxKnobHeight - _distance;
+    double knobRadius = _leverWidth;
+    double knobDistance = 0;
+    
+    // adjust handle height based on knob's distance from base center
+    double baseCenter = maxKnobHeight/2;
+    double percentChange = ((newKnobHeight-baseCenter)/(maxKnobHeight-baseCenter));
+    double newHandleLength = baseCenter * percentChange + (_leverWidth/2);
+    
+    // knob
+    knobRadius = _leverWidth - (percentChange*6);
+    knobDistance = percentChange*3;
+    
+    // if knob is below center
+    if (_distance > _leverHeight/2) {
+        baseCenter += (_leverWidth/4);
+        knobRadius = _leverWidth + (percentChange*6);
+        knobDistance = -percentChange*3;
+    }
+    
+    //NSLog(@"distance: %f",_distance);
+    
+    // set new CGRects
+    CGRect newKnobCircle = CGRectMake(knobDistance, newKnobHeight, knobRadius, knobRadius);
+    _knob.path = [UIBezierPath bezierPathWithOvalInRect:newKnobCircle].CGPath;
+    
+    CGRect newHandleRect = CGRectMake(_leverWidth/3, baseCenter, _leverWidth/3, newHandleLength);
+    _handle.path = [UIBezierPath bezierPathWithRect:newHandleRect].CGPath;
 }
 
 @end
