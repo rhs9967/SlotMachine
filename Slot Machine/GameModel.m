@@ -10,12 +10,44 @@
 
 @implementation GameModel{
     //private ivars
-    NSMutableArray *_reels;
     int _amount;
+    
+    Reel *_leftReel;
+    Reel *_middleReel;
+    Reel *_rightReel;
 }
 
 // public
--(void)updateGameStage{
+-(id)init:(CGSize)size :(CGPoint)pos
+{
+    self = [super init];
+    // setup reels
+    _leftReel = [[Reel alloc] init];
+    _middleReel = [[Reel alloc] init];
+    _rightReel = [[Reel alloc] init];
+    
+    // positions
+    CGPoint left = CGPointMake(pos.x - size.width/3, pos.y-230);
+    CGPoint middle = CGPointMake(pos.x, pos.y-230);
+    CGPoint right = CGPointMake(pos.x + size.width/3, pos.y-230);
+    
+    // place reels
+    _leftReel.zPosition = -1;
+    _leftReel.position = left;
+    [self addChild:_leftReel];
+    
+    _middleReel.zPosition = -1;
+    _middleReel.position = middle;
+    [self addChild:_middleReel];
+    
+    _rightReel.zPosition = -1;
+    _rightReel.position = right;
+    [self addChild:_rightReel];
+    
+    return self;
+}
+
+-(void)updateGameStage:(CGFloat)dt{
     // Game logic //
     
     // Player stage
@@ -29,13 +61,16 @@
         NSLog(@"GameModel - GameStageSpin Active: SPINNING!");
         
         // if reels have actions, continue // SKNode
+        [_leftReel update:dt];
+        [_middleReel update:dt];
+        [_rightReel update:dt];
         
-        // if reels don't have actions
-            // if weren't spun, begin actions
-        
-            // else, move on to results stage
-            //_gameStage = kGameStageResult;
-            return;
+        // if not spinning move on to results stage
+        if(!_rightReel.spinning)
+        {
+            _gameStage = kGameStageResult;
+        }
+        return;
     } // end spin stage
     
     // Result stage
@@ -47,6 +82,13 @@
         
     }
 } // end updateGameStage
+
+-(void)spinReels
+{
+    [_leftReel spin];
+    [_middleReel spin];
+    [_rightReel spin];
+}
 
 // private
 -(void) notifyGameDidEnd{

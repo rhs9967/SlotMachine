@@ -11,13 +11,13 @@
 @interface Reel : SKNode
 {
     NSMutableArray *_reelNodes; //used for images
-    Boolean _spinning;
     CGFloat _speed;
     CGFloat _accel;
+    CGFloat _curSpinTime;
 }
 
 @property NSMutableArray *nodeNumbers; //used to check for payout
-
+@property Boolean spinning;
 
 //set up
 -(id)init;

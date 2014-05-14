@@ -24,13 +24,13 @@ static CGFloat const kMaxSpeed = 115;
 static CGFloat const kMinAccel = .5;
 static int const kRangeAccel = .2;
 
+static CGFloat const kSpinTime = 5;
+
 @implementation Reel
 
 -(id)init
 {
-    {
-        self = [super init];
-    }
+    self = [super init];
     
     _reelNodes = [[NSMutableArray alloc]init];
     _nodeNumbers = [[NSMutableArray alloc]init];
@@ -62,38 +62,40 @@ static int const kRangeAccel = .2;
     //randomized image
     CGFloat random = ((double)arc4random() / ARC4RANDOM_MAX);
     NSString *image;
-    NSInteger *num;
+    NSNumber *num;
     
     if(random < k7Chance)
     {
         image = @"7.png";
+        num = @1;
     }
     else if(random < kBellChance)
     {
         image = @"Bell.png";
+        num = @2;
     }
     else if (random < kBarChance)
     {
         image = @"Bar.png";
+        num = @3;
     }
     else if(random < kWatermelonChance)
     {
         image = @"Watermelon.png";
+        num = @4;
     }
     else
     {
         //cherry
         image = @"Cherry.png";
+        num = @5;
     }
     
     //make a new SKSpriteNode to insert into the array
     SKSpriteNode *newNode = [SKSpriteNode spriteNodeWithImageNamed:image];
     newNode.position = CGPointMake(0, kTop);
     [_reelNodes insertObject: newNode atIndex: 0];
-    
-    //
-    //TODO-Add number
-    //
+    [_nodeNumbers insertObject: num atIndex: 0];
     
     //make sure all below it are now in the right spots
     for(int j = 1; j< _reelNodes.count; j++)
@@ -106,9 +108,21 @@ static int const kRangeAccel = .2;
 
 -(void)spin
 {
-    _spinning = YES;
-    CGFloat random = ((double)arc4random() / ARC4RANDOM_MAX);
-    _accel = (random * kRangeAccel)+kMinAccel;
+    if(!_spinning)
+    {
+        _spinning = YES;
+        CGFloat random = ((double)arc4random() / ARC4RANDOM_MAX);
+        _accel = (random * kRangeAccel)+kMinAccel;
+        _curSpinTime = 0;
+    }
+}
+
+-(void)stop
+{
+    if(_spinning)
+    {
+        _spinning = NO;
+    }
 }
 
 -(void)update:(CGFloat)dt
@@ -116,6 +130,8 @@ static int const kRangeAccel = .2;
     //check nodes and see if they need to change
     if(_spinning)
     {
+        _curSpinTime += dt;
+        
         for (int i = 0; i< kNumOnReel; i++)
         {
             SKSpriteNode *Node = (SKSpriteNode *)_reelNodes[i];
@@ -142,14 +158,16 @@ static int const kRangeAccel = .2;
                     //remove
                     [self removeChildrenInArray:@[RemoveNode]];
                     [_reelNodes removeObject:RemoveNode];
-                    
-                    //
-                    //TODO- remove number
-                    //
+                    [_nodeNumbers removeObjectAtIndex:j];
                     
                     //add new
                     [self createNode];
                     [self addChild:(SKSpriteNode *)_reelNodes[0]];
+                    
+                    if(_curSpinTime >= kSpinTime)
+                    {
+                        [self stop];
+                    }
                 }
             }
         }

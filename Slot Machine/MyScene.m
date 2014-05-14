@@ -15,12 +15,7 @@
     Lever *_lever;
     
     SKSpriteNode *_overlay;
-    //SKSpriteNode *_leftReel;
-    //SKSpriteNode *_middleReel;
-    //SKSpriteNode *_rightReel;
-    Reel *_leftReel;
-    Reel *_middleReel;
-    Reel *_rightReel;
+
     
     NSMutableArray *_reelTextures;
     
@@ -36,7 +31,6 @@
         self.backgroundColor = [SKColor colorWithRed:0.0 green:0.4 blue:0.0 alpha:1.0];
         
         // make gameModel
-        _gameModel = [[GameModel alloc] init];
         _lever = [[Lever alloc] init];
         
         // continue setup
@@ -48,7 +42,6 @@
          selector:@selector(handleNotificationGameDidEnd:)
          name:kNotificationGameDidEnd
          object:_gameModel];
-        
         /*
         SKLabelNode *myLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
         
@@ -70,6 +63,12 @@
     // Scale up
     _overlay.xScale = 1.5;
     _overlay.yScale = 1.5;
+    
+    //create gameModel
+    _gameModel = [[GameModel alloc] init:_overlay.size :_overlay.position];
+    [self addChild:_gameModel];
+    
+    //add overlay
     [self addChild:_overlay];
     
     // load reel atlas
@@ -82,31 +81,6 @@
         SKTexture *texture = [reelAtlas textureNamed:name];
         [_reelTextures addObject:texture];
     }
-    
-    // setup reels
-    _leftReel = [[Reel alloc] init];
-    _middleReel = [[Reel alloc] init];
-    _rightReel = [[Reel alloc] init];
-    
-    
-    // positions
-    CGPoint left = CGPointMake(_overlay.position.x - _overlay.size.width/3, _overlay.position.y-230);
-    CGPoint middle = CGPointMake(_overlay.position.x, _overlay.position.y-230);
-    CGPoint right = CGPointMake(_overlay.position.x + _overlay.size.width/3, _overlay.position.y-230);
-    
-    // place reels
-    _leftReel.zPosition = -1;
-    _leftReel.position = left;
-    [self addChild:_leftReel];
-    
-    _middleReel.zPosition = -1;
-    _middleReel.position = middle;
-    [self addChild:_middleReel];
-    
-    _rightReel.zPosition = -1;
-    _rightReel.position = right;
-    [self addChild:_rightReel];
-    
     
     // add lever
     CGPoint leverPos = CGPointMake(_overlay.position.x*2, _overlay.position.y-150);
@@ -124,10 +98,6 @@
         // get touch position
         CGPoint location = [touch locationInNode:self];
         //NSLog(@"Touch = (%f, %f)",location.x, location.y);
-        
-        [_leftReel spin];
-        [_middleReel spin];
-        [_rightReel spin];
         
         
         // Check if touch location is on lever and if in player gamestage
@@ -182,6 +152,9 @@
                 // set lever down
                 _lever.distance = _lever.leverHeight;
                 
+                // spin reels
+                [_gameModel spinReels];
+                
                 // end stage
                 
                 _gameModel.gameStage = kGameStageSpin;
@@ -206,10 +179,7 @@
     _lastTime = time;
     // NSLog(@"delta=%f",dt);
     
-    [_gameModel updateGameStage];
-    [_leftReel update:dt];
-    [_middleReel update:dt];
-    [_rightReel update:dt];
+    [_gameModel updateGameStage:dt];
     [_lever update];
 }
 

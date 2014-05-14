@@ -21,6 +21,8 @@ typedef enum : int{
 @interface GameModel : SKNode
 @property (nonatomic) kGameStage gameStage;
 
--(void)updateGameStage;
+-(id)init :(CGSize)size :(CGPoint)pos;
+-(void)updateGameStage : (CGFloat)dt;
 
+-(void)spinReels;
 @end
