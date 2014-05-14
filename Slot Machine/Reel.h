@@ -11,6 +11,9 @@
 @interface Reel : SKNode
 {
     NSMutableArray *_reelNodes; //used for images
+    Boolean _spinning;
+    CGFloat _speed;
+    CGFloat _accel;
 }
 
 @property NSMutableArray *nodeNumbers; //used to check for payout
@@ -23,6 +26,8 @@
 //gameplay
 -(void)update:(CGFloat)dt;
 -(void)createNode;
+
+-(void)spin;
 
 //utilities
 -(CGFloat)getRandomFloatBetween:(CGFloat)from to:(CGFloat)to;

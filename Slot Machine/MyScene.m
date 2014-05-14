@@ -24,6 +24,8 @@
     
     NSMutableArray *_reelTextures;
     
+    double _lastTime;
+    
     BOOL _leverTouched;
 }
 
@@ -82,9 +84,6 @@
     }
     
     // setup reels
-    //_leftReel = [SKSpriteNode spriteNodeWithTexture:[_reelTextures objectAtIndex:0]];
-    //_middleReel = [SKSpriteNode spriteNodeWithTexture:[_reelTextures objectAtIndex:5]];
-    //_rightReel = [SKSpriteNode spriteNodeWithTexture:[_reelTextures objectAtIndex:10]];
     _leftReel = [[Reel alloc] init];
     _middleReel = [[Reel alloc] init];
     _rightReel = [[Reel alloc] init];
@@ -126,9 +125,9 @@
         CGPoint location = [touch locationInNode:self];
         //NSLog(@"Touch = (%f, %f)",location.x, location.y);
         
-        //[self spinReel: _leftReel];
-        //[self spinReel: _middleReel];
-        //[self spinReel: _rightReel];
+        [_leftReel spin];
+        [_middleReel spin];
+        [_rightReel spin];
         
         
         // Check if touch location is on lever and if in player gamestage
@@ -200,18 +199,21 @@
 
 -(void)update:(CFTimeInterval)currentTime {
     /* Called before each frame is rendered */
+    // calculate deltaTime
+    double time = (double)CFAbsoluteTimeGetCurrent();
+    // NSLog(@"time=%f",time);
+    float dt = time - _lastTime;
+    _lastTime = time;
+    // NSLog(@"delta=%f",dt);
+    
     [_gameModel updateGameStage];
+    [_leftReel update:dt];
+    [_middleReel update:dt];
+    [_rightReel update:dt];
     [_lever update];
 }
 
--(void)spinReel:(SKSpriteNode*)reel{
-    // create an action that will animate the reel textures
-    SKAction *reelAction = [SKAction animateWithTextures:_reelTextures timePerFrame:0.1];
-    //[_leftReel runAction:[SKAction sequence:@[reelAction, remove]]];
-    [reel runAction:reelAction];
-    //[reel runAction:[SKAction repeatActionForever:reelAction]];
-    
-}
+
 
 #pragma mark - Notifications
 -(void) handleNotificationGameDidEnd:(NSNotification *)notification{
