@@ -11,16 +11,20 @@
 @implementation GameModel{
     //private ivars
     int _amount;
+    int _pullsLeft;
     
     Reel *_leftReel;
     Reel *_middleReel;
     Reel *_rightReel;
+    
 }
 
 // public
 -(id)init:(CGSize)size :(CGPoint)pos
 {
     self = [super init];
+    
+    _pullsLeft = 5;
     // setup reels
     _leftReel = [[Reel alloc] init];
     _middleReel = [[Reel alloc] init];
@@ -75,10 +79,20 @@
     
     // Result stage
     if (_gameStage == kGameStageResult) {
-        // display results
-        
+        // check for winnings
+        if([self didWin])
+        {
+            // display results
+            
+        }
         // if touch detected, game over
-            //[self notifyGameDidEnd];
+        _gameStage = kGameStagePlayer;
+        _pullsLeft--;
+        NSLog(@"Pulls Left: %d",_pullsLeft);
+        if(_pullsLeft <= 0)
+        {
+            [self notifyGameDidEnd];
+        }
         
     }
 } // end updateGameStage
@@ -91,6 +105,15 @@
 }
 
 // private
+-(Boolean)didWin
+{
+    for(int i = 1; i < 4; i++)
+    {
+        NSLog(@"Line %d,|%@|%@|%@|",i,_leftReel.nodeNumbers[i],_middleReel.nodeNumbers[i],_rightReel.nodeNumbers[i]);
+    }
+    return false;
+}
+
 -(void) notifyGameDidEnd{
     NSNotificationCenter *notificationCenter = [NSNotificationCenter defaultCenter];
     
