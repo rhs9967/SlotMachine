@@ -91,6 +91,10 @@ static int const kRangeAccel = .2;
     newNode.position = CGPointMake(0, kTop);
     [_reelNodes insertObject: newNode atIndex: 0];
     
+    //
+    //TODO-Add number
+    //
+    
     //make sure all below it are now in the right spots
     for(int j = 1; j< _reelNodes.count; j++)
     {
@@ -138,6 +142,10 @@ static int const kRangeAccel = .2;
                     //remove
                     [self removeChildrenInArray:@[RemoveNode]];
                     [_reelNodes removeObject:RemoveNode];
+                    
+                    //
+                    //TODO- remove number
+                    //
                     
                     //add new
                     [self createNode];
