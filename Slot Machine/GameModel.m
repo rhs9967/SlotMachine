@@ -17,6 +17,8 @@
     Reel *_middleReel;
     Reel *_rightReel;
     
+    Lever *_lever;
+    
 }
 
 // public
@@ -25,6 +27,8 @@
     self = [super init];
     
     _pullsLeft = 5;
+    
+    // Reels //
     // setup reels
     _leftReel = [[Reel alloc] init];
     _middleReel = [[Reel alloc] init];
@@ -48,15 +52,27 @@
     _rightReel.position = right;
     [self addChild:_rightReel];
     
+    // Lever //
+    // setup lever
+    _lever = [[Lever alloc] init];
+    
+    // position and place lever
+    CGPoint leverPos = CGPointMake(pos.x*2, pos.y-150);
+    _lever.position = leverPos;
+    
+    // add lever
+    [self addChild:_lever];
+    
     return self;
 }
 
 -(void)updateGameStage:(CGFloat)dt{
     // Game logic //
+    // update Lever visuals accordingly
+    [_lever update];
     
     // Player stage
     if (_gameStage == kGameStagePlayer) {
-        
         return;
     } // end player stage
     
@@ -72,6 +88,10 @@
         // if not spinning move on to results stage
         if(!_rightReel.spinning)
         {
+            // reset lever
+            _lever.isRising = YES;
+            
+            // move to next stage
             _gameStage = kGameStageResult;
         }
         return;
@@ -102,6 +122,44 @@
     [_leftReel spin];
     [_middleReel spin];
     [_rightReel spin];
+}
+
+-(void)checkTouch:(CGPoint)location :(BOOL)touchedEnded{
+    // if the touch has ended, check if final touch is within lever 'area'
+    if (touchedEnded) {
+        if (location.x >= _lever.position.x && location.x <= _lever.position.x + _lever.leverWidth) {
+            // if lever was pulled far, set lever to down position and end stage
+            if ([_lever isPulledFar]) {
+                // set lever down
+                _lever.isRising = YES;
+                _lever.leverTouched = NO;
+                
+                // spin reels
+                [self spinReels];
+                
+                // end stage
+                _gameStage = kGameStageSpin;
+                
+                return;
+            }
+        }
+        // lever is reset if let go outside lever or wasn't pulled far
+        _lever.isRising = YES;
+    } else {
+        // Check if touch location is on lever
+        if ([_lever containsPoint:location] ) {//|| _lever.leverTouched) {
+            // if so, set _leverTouched to YES
+            if (_lever.leverTouched == NO) _lever.leverTouched = YES;
+            
+            // set lever distance accordingly
+            _lever.distance = (_lever.position.y + _lever.leverHeight) - location.y;
+            
+            _lever.isRising = NO;
+            return;
+        }
+    }
+    
+    _lever.leverTouched = NO;
 }
 
 // private

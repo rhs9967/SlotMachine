@@ -17,14 +17,32 @@
         
         self.backgroundColor = [SKColor colorWithRed:0.0 green:0.4 blue:0.0 alpha:1.0];
         
+        // labels
         SKLabelNode *myLabel = [SKLabelNode labelNodeWithFontNamed:@"GillSans-Bold"];
+        SKLabelNode *name1Label = [SKLabelNode labelNodeWithFontNamed:@"GillSans-Bold"];
+        SKLabelNode *name2Label = [SKLabelNode labelNodeWithFontNamed:@"GillSans-Bold"];
         
+        // myLabel
         myLabel.text = @"Slot Machine";
         myLabel.fontSize = 75;
         myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                        CGRectGetMidY(self.frame));
         
+        // name1Label
+        name1Label.text = @"Carl Milazzo";
+        name1Label.fontSize = 60;
+        name1Label.position = CGPointMake(CGRectGetMidX(self.frame),
+                                       CGRectGetMidY(self.frame)/2);
+        
+        // name2Label
+        name2Label.text = @"Robert Schrupp";
+        name2Label.fontSize = 60;
+        name2Label.position = CGPointMake(CGRectGetMidX(self.frame),
+                                       CGRectGetMidY(self.frame)/3);
+        
         [self addChild:myLabel];
+        [self addChild:name1Label];
+        [self addChild:name2Label];
     }
     return self;
 }

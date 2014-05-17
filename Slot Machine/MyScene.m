@@ -12,7 +12,7 @@
 
 @implementation MyScene{
     GameModel *_gameModel;
-    Lever *_lever;
+    //Lever *_lever;
     
     SKSpriteNode *_overlay;
 
@@ -31,7 +31,7 @@
         self.backgroundColor = [SKColor colorWithRed:0.0 green:0.4 blue:0.0 alpha:1.0];
         
         // make gameModel
-        _lever = [[Lever alloc] init];
+        //_lever = [[Lever alloc] init];
         
         // continue setup
         [self setup];
@@ -81,13 +81,6 @@
         SKTexture *texture = [reelAtlas textureNamed:name];
         [_reelTextures addObject:texture];
     }
-    
-    // add lever
-    CGPoint leverPos = CGPointMake(_overlay.position.x*2, _overlay.position.y-150);
-    _lever.position = leverPos;
-    [_lever createParts:90:300];
-    [self addChild:_lever];
-    
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -99,28 +92,11 @@
         CGPoint location = [touch locationInNode:self];
         //NSLog(@"Touch = (%f, %f)",location.x, location.y);
         
-        
-        // Check if touch location is on lever and if in player gamestage
-        if ([_lever containsPoint:location] && _gameModel.gameStage == kGameStagePlayer) {
-            _leverTouched = YES;
-            _lever.distance = (_lever.position.y + _lever.leverHeight) - location.y;
-        } else {
-            _leverTouched = NO;
+        // if Player Stage
+        if (_gameModel.gameStage == kGameStagePlayer) {
+            // inform gameModel of touch
+            [_gameModel checkTouch:location :NO];
         }
-        
-        /*
-        CGPoint location = [touch locationInNode:self];
-        
-        SKSpriteNode *sprite = [SKSpriteNode spriteNodeWithImageNamed:@"Spaceship"];
-        
-        sprite.position = location;
-        
-        SKAction *action = [SKAction rotateByAngle:M_PI duration:1];
-        
-        [sprite runAction:[SKAction repeatActionForever:action]];
-        
-        [self addChild:sprite];
-         */
     }
 }
 
@@ -131,10 +107,11 @@
         //UITouch* touch = [touches anyObject];
         CGPoint location = [touch locationInNode:self];
         
-        if ([_lever containsPoint:location] && _leverTouched) {
-            _lever.distance = (_lever.position.y + _lever.leverHeight) - location.y;
+        // if Player Stage
+        if (_gameModel.gameStage == kGameStagePlayer) {
+            // inform gameModel of touch
+            [_gameModel checkTouch:location :NO];
         }
-        
     }
 }
 
@@ -145,27 +122,10 @@
         //UITouch* touch = [touches anyObject];
         CGPoint location = [touch locationInNode:self];
         
-        // if player is still touching lever area
-        if (location.x >= _lever.position.x && location.x <= _lever.position.x + _lever.leverWidth && _leverTouched) {
-            // if lever was pulled far, set lever to down position and end stage
-            if ([_lever isPulledFar]) {
-                // set lever down
-                _lever.distance = _lever.leverHeight;
-                
-                // spin reels
-                [_gameModel spinReels];
-                
-                // end stage
-                
-                _gameModel.gameStage = kGameStageSpin;
-                
-                return;
-            }
-        }
-        
-        // lever is reset if touch is let go outside lever or was not pulled far (during player gamestage)
+        // if Player Stage
         if (_gameModel.gameStage == kGameStagePlayer) {
-            _lever.distance = 0;
+            // inform gameModel of touch
+            [_gameModel checkTouch:location :YES];
         }
     }
 }
@@ -180,7 +140,7 @@
     // NSLog(@"delta=%f",dt);
     
     [_gameModel updateGameStage:dt];
-    [_lever update];
+    //[_lever update];
 }
 
 

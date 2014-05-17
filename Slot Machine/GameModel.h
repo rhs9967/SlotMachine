@@ -20,9 +20,10 @@ typedef enum : int{
 
 @interface GameModel : SKNode
 @property (nonatomic) kGameStage gameStage;
+@property (nonatomic) CGPoint touch;
 
 -(id)init :(CGSize)size :(CGPoint)pos;
 -(void)updateGameStage : (CGFloat)dt;
-
+-(void)checkTouch : (CGPoint)location : (BOOL)touchedEnded;
 -(void)spinReels;
 @end
