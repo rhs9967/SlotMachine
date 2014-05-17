@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F22F83C1927FACE005E5881 /* casino_bg1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3F22F83B1927FACE005E5881 /* casino_bg1.mp3 */; };
+		3F22F83F1927FF5F005E5881 /* casino_bg2.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3F22F83D1927FF5F005E5881 /* casino_bg2.wav */; };
+		3F22F8401927FF5F005E5881 /* casino_bg3.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3F22F83E1927FF5F005E5881 /* casino_bg3.wav */; };
+		3F22F84219280290005E5881 /* spin1.wav in Resources */ = {isa = PBXBuildFile; fileRef = 3F22F84119280290005E5881 /* spin1.wav */; };
+		3F22F8471928053B005E5881 /* fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F22F8441928053B005E5881 /* fire.sks */; };
+		3F22F8481928053B005E5881 /* smoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F22F8451928053B005E5881 /* smoke.sks */; };
+		3F22F8491928053B005E5881 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F22F8461928053B005E5881 /* spark.png */; };
+		3F22F853192806B9005E5881 /* spark1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F22F852192806B9005E5881 /* spark1.sks */; };
 		3F65B4B61915613900AC931E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F65B4B51915613900AC931E /* Foundation.framework */; };
 		3F65B4B81915613900AC931E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F65B4B71915613900AC931E /* CoreGraphics.framework */; };
 		3F65B4BA1915613900AC931E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F65B4B91915613900AC931E /* UIKit.framework */; };
@@ -49,6 +57,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F22F83B1927FACE005E5881 /* casino_bg1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = casino_bg1.mp3; sourceTree = "<group>"; };
+		3F22F83D1927FF5F005E5881 /* casino_bg2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = casino_bg2.wav; sourceTree = "<group>"; };
+		3F22F83E1927FF5F005E5881 /* casino_bg3.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = casino_bg3.wav; sourceTree = "<group>"; };
+		3F22F84119280290005E5881 /* spin1.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = spin1.wav; sourceTree = "<group>"; };
+		3F22F8441928053B005E5881 /* fire.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = fire.sks; sourceTree = "<group>"; };
+		3F22F8451928053B005E5881 /* smoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = smoke.sks; sourceTree = "<group>"; };
+		3F22F8461928053B005E5881 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
+		3F22F852192806B9005E5881 /* spark1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = spark1.sks; sourceTree = "<group>"; };
 		3F65B4B21915613900AC931E /* Slot Machine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Slot Machine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F65B4B51915613900AC931E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3F65B4B71915613900AC931E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -115,6 +131,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F22F8381927FA80005E5881 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				3F22F84119280290005E5881 /* spin1.wav */,
+				3F22F83D1927FF5F005E5881 /* casino_bg2.wav */,
+				3F22F83E1927FF5F005E5881 /* casino_bg3.wav */,
+				3F22F83B1927FACE005E5881 /* casino_bg1.mp3 */,
+			);
+			name = Sounds;
+			path = Images.xcassets/Sounds;
+			sourceTree = "<group>";
+		};
+		3F22F8431928053B005E5881 /* Particles */ = {
+			isa = PBXGroup;
+			children = (
+				3F22F852192806B9005E5881 /* spark1.sks */,
+				3F22F8441928053B005E5881 /* fire.sks */,
+				3F22F8451928053B005E5881 /* smoke.sks */,
+				3F22F8461928053B005E5881 /* spark.png */,
+			);
+			name = Particles;
+			path = Images.xcassets/Particles;
+			sourceTree = "<group>";
+		};
 		3F65B4A91915613900AC931E = {
 			isa = PBXGroup;
 			children = (
@@ -165,6 +205,8 @@
 				3F65B4F11915655F00AC931E /* TitleScene.h */,
 				3F65B4F21915655F00AC931E /* TitleScene.m */,
 				3F65B4D41915613900AC931E /* Images.xcassets */,
+				3F22F8431928053B005E5881 /* Particles */,
+				3F22F8381927FA80005E5881 /* Sounds */,
 				3F65B4F7191569DC00AC931E /* Images */,
 				3F65B4BE1915613900AC931E /* Supporting Files */,
 			);
@@ -301,15 +343,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F22F84219280290005E5881 /* spin1.wav in Resources */,
+				3F22F8481928053B005E5881 /* smoke.sks in Resources */,
 				3F65B4FF1915722B00AC931E /* Reel.atlas in Resources */,
 				3F65B4C21915613900AC931E /* InfoPlist.strings in Resources */,
 				DAF94FF51919425D002BE1B9 /* Bell.png in Resources */,
+				3F22F83F1927FF5F005E5881 /* casino_bg2.wav in Resources */,
+				3F22F8491928053B005E5881 /* spark.png in Resources */,
 				3F65B4FD19156D4600AC931E /* reelSpin.png in Resources */,
 				DAF94FF41919425D002BE1B9 /* Bar.png in Resources */,
 				3F65B4D51915613900AC931E /* Images.xcassets in Resources */,
 				3F65B4F9191569DC00AC931E /* slotmachine-symbol-overlay.png in Resources */,
+				3F22F8471928053B005E5881 /* fire.sks in Resources */,
 				3F65B4FB191569F100AC931E /* Spaceship.png in Resources */,
 				3F65B4CB1915613900AC931E /* Main.storyboard in Resources */,
+				3F22F83C1927FACE005E5881 /* casino_bg1.mp3 in Resources */,
+				3F22F853192806B9005E5881 /* spark1.sks in Resources */,
+				3F22F8401927FF5F005E5881 /* casino_bg3.wav in Resources */,
 				DAF94FF61919425D002BE1B9 /* Cherry.png in Resources */,
 				DAF94FF31919425D002BE1B9 /* 7.png in Resources */,
 				DAF94FF71919425D002BE1B9 /* Watermelon.png in Resources */,

@@ -8,6 +8,8 @@
 
 #import "GameModel.h"
 
+static int const kMaxPulls = 5;
+
 @implementation GameModel{
     //private ivars
     int _amount;
@@ -19,6 +21,7 @@
     
     Lever *_lever;
     
+    SKEmitterNode *_spark1;    
 }
 
 // public
@@ -26,7 +29,7 @@
 {
     self = [super init];
     
-    _pullsLeft = 5;
+    _pullsLeft = kMaxPulls;
     
     // Reels //
     // setup reels
@@ -63,6 +66,16 @@
     // add lever
     [self addChild:_lever];
     
+    // EmitterNodes
+    _spark1 = [NSKeyedUnarchiver unarchiveObjectWithFile:
+               [[NSBundle mainBundle] pathForResource:@"spark1"
+                                               ofType:@"sks"]];
+    _spark1.position = CGPointMake(pos.x, pos.y);
+    _spark1.zPosition = 10;
+    _spark1.name = @"spark1";
+    //_spark1.targetNode = self->_overlay;
+    //[self addChild:_spark1];
+    
     return self;
 }
 
@@ -73,6 +86,7 @@
     
     // Player stage
     if (_gameStage == kGameStagePlayer) {
+        //[_spark1 removeFromParent];
         return;
     } // end player stage
     
@@ -111,11 +125,19 @@
         NSLog(@"Pulls Left: %d",_pullsLeft);
         if(_pullsLeft <= 0)
         {
+            [self addChild:_spark1];
             [self notifyGameDidEnd];
         }
         
+        
     }
 } // end updateGameStage
+
+-(void)reset{
+    [_spark1 removeFromParent];
+    _gameStage = kGameStagePlayer;
+    _pullsLeft = kMaxPulls;
+}
 
 -(void)spinReels
 {

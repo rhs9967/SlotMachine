@@ -9,13 +9,16 @@
 #import "MyScene.h"
 #import "GameModel.h"
 #import "Lever.h"
+#import <AVFoundation/AVFoundation.h>
 
 @implementation MyScene{
     GameModel *_gameModel;
-    //Lever *_lever;
     
     SKSpriteNode *_overlay;
-
+    
+    AVAudioPlayer *_bgAudio;
+    AVAudioPlayer *_bgAudio1;
+    AVAudioPlayer *_bgAudio2;
     
     NSMutableArray *_reelTextures;
     
@@ -27,11 +30,20 @@
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
-        
+        // background color
         self.backgroundColor = [SKColor colorWithRed:0.0 green:0.4 blue:0.0 alpha:1.0];
         
-        // make gameModel
-        //_lever = [[Lever alloc] init];
+        // AVAudioplayer //
+        // URLs
+        NSURL *bgURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"casino_bg1" ofType:@"mp3"]];
+        NSURL *bgURL1 = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"casino_bg2" ofType:@"wav"]];
+        NSURL *bgURL2 = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"casino_bg3" ofType:@"wav"]];
+        
+        // Players
+        _bgAudio = [[AVAudioPlayer alloc] initWithContentsOfURL:bgURL error:nil];
+        _bgAudio1 = [[AVAudioPlayer alloc] initWithContentsOfURL:bgURL1 error:nil];
+        _bgAudio2 = [[AVAudioPlayer alloc] initWithContentsOfURL:bgURL2 error:nil];
+        
         
         // continue setup
         [self setup];
@@ -81,6 +93,15 @@
         SKTexture *texture = [reelAtlas textureNamed:name];
         [_reelTextures addObject:texture];
     }
+    
+    // play bgAudio
+    // play background music
+    [_bgAudio setNumberOfLoops: -1];
+    [_bgAudio1 setNumberOfLoops: -1];
+    [_bgAudio2 setNumberOfLoops: -1];
+    //[_bgAudio play];
+    [_bgAudio1 play];
+    [_bgAudio2 play];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -97,6 +118,11 @@
             // inform gameModel of touch
             [_gameModel checkTouch:location :NO];
         }
+        
+        // if Results Stage
+        //if (_gameModel.gameStage == kGameStageResult) {
+         //   [_gameModel reset];
+        //}
     }
 }
 

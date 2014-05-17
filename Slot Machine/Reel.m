@@ -7,6 +7,7 @@
 //
 
 #import "Reel.h"
+#import <AVFoundation/AVFoundation.h>
 
 #define ARC4RANDOM_MAX      0x100000000
 
@@ -26,7 +27,9 @@ static int const kRangeAccel = .2;
 
 static CGFloat const kSpinTime = 5;
 
-@implementation Reel
+@implementation Reel{
+    AVAudioPlayer *_spinSound;
+}
 
 -(id)init
 {
@@ -34,6 +37,11 @@ static CGFloat const kSpinTime = 5;
     
     _reelNodes = [[NSMutableArray alloc]init];
     _nodeNumbers = [[NSMutableArray alloc]init];
+    
+    // setup sound
+    NSURL *spinURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"spin1" ofType:@"wav"]];
+    _spinSound = [[AVAudioPlayer alloc] initWithContentsOfURL:spinURL error:nil];
+    
     //setup standard images
     [self createReel];
     
@@ -114,6 +122,10 @@ static CGFloat const kSpinTime = 5;
         CGFloat random = ((double)arc4random() / ARC4RANDOM_MAX);
         _accel = (random * kRangeAccel)+kMinAccel;
         _curSpinTime = 0;
+        
+        // play sound
+        [_spinSound setNumberOfLoops: -1];
+        [_spinSound play];
     }
 }
 
@@ -122,6 +134,9 @@ static CGFloat const kSpinTime = 5;
     if(_spinning)
     {
         _spinning = NO;
+        
+        // stop sound
+        [_spinSound stop];
     }
 }
 

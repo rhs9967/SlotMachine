@@ -26,4 +26,5 @@ typedef enum : int{
 -(void)updateGameStage : (CGFloat)dt;
 -(void)checkTouch : (CGPoint)location : (BOOL)touchedEnded;
 -(void)spinReels;
+-(void)reset;
 @end
