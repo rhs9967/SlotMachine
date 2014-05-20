@@ -138,7 +138,6 @@
         // get touch position
         CGPoint location = [touch locationInNode:self];
         //NSLog(@"Touch = (%f, %f)",location.x, location.y);
-        
         SKNode *node = [self nodeAtPoint:location];
         
         // if Player Stage
@@ -150,9 +149,13 @@
             if ([node.name isEqualToString:@"betPlus"]) {
                 // begin button press
                 _plusButtonTouched = YES;
+                _betIncrease.xScale = .9;
+                _betIncrease.yScale = .9;
             } else if ([node.name isEqualToString:@"betMinus"]) {
                 // begin button press
                 _minusButtonTouched = YES;
+                _betDecrease.xScale = .9;
+                _betDecrease.yScale = .9;
             }
         }
         
@@ -184,12 +187,32 @@
         
         //UITouch* touch = [touches anyObject];
         CGPoint location = [touch locationInNode:self];
+        SKNode *node = [self nodeAtPoint:location];
         
         // if Player Stage
         if (_gameModel.gameStage == kGameStagePlayer) {
             // inform gameModel of touch
             [_gameModel checkTouch:location :YES];
+            
+            // if touch was on betting buttons
+            if ([node.name isEqualToString:@"betPlus"] && _plusButtonTouched) {
+                // inform gameModel
+                [_gameModel increaseBet];
+            } else if ([node.name isEqualToString:@"betMinus"] && _minusButtonTouched) {
+                // inform gameModel
+                [_gameModel decreaseBet];
+            }
         }
+        
+        // end button press
+        _plusButtonTouched = NO;
+        _minusButtonTouched = NO;
+        
+        // reset button scales
+        _betIncrease.xScale = 1;
+        _betIncrease.yScale = 1;
+        _betDecrease.xScale = 1;
+        _betDecrease.yScale = 1;
     }
 }
 
@@ -212,13 +235,13 @@
 
 #pragma mark - Notifications
 -(void) handleNotificationGameDidEnd:(NSNotification *)notification{
-    //NSDictionary *userInfo = notification.userInfo;
-    //NSNumber *num = userInfo[@"winnings"]; // the key for the dictionary
-    //NSString *message = [NSString (@"Winnings: %f", num)];//NSString(@"Winnings: %f", [num intValue]);
+    NSDictionary *userInfo = notification.userInfo;
+    NSNumber *num = userInfo[@"winnings"]; // the key for the dictionary
+    NSString *message = [NSString stringWithFormat:@"Winnings: $%@", num];//NSString(@"Winnings: %f", [num intValue]);
     
     UIAlertView *alert = [[UIAlertView alloc]
                           initWithTitle:@"GameOver"
-                          message:Nil // message
+                          message: message
                           delegate:self
                           cancelButtonTitle:Nil
                           otherButtonTitles:@"Play Again", nil];

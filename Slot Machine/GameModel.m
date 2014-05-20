@@ -11,6 +11,7 @@
 static int const kMaxPulls = 5;
 static int const kMinBet = 1;
 static int const kMaxBet = 10;
+static int const kBetIncrement = 1;
 
 @implementation GameModel{
     //private ivars
@@ -191,6 +192,24 @@ static int const kMaxBet = 10;
     _lever.leverTouched = NO;
 }
 
+-(void)increaseBet{
+    // increase bet amount
+    _bet += kBetIncrement;
+    // check if incease will move past max amount
+    if (_bet > kMaxBet) {
+        _bet = kMaxBet;
+    }
+}
+
+-(void)decreaseBet{
+    // increase bet amount
+    _bet -= kBetIncrement;
+    // check if incease will move past max amount
+    if (_bet < kMinBet) {
+        _bet = kMinBet;
+    }
+}
+
 // private
 -(CGFloat)didWin
 {
@@ -211,7 +230,7 @@ static int const kMaxBet = 10;
     //check accending diagonal line
     winnings += [self winningLine:_leftReel.nodeNumbers[3] node2:_middleReel.nodeNumbers[2] node3:_rightReel.nodeNumbers[1]];
     NSLog(@"total winnings: %f",winnings);
-    return winnings;
+    return winnings * _bet;
 }
 
 -(CGFloat)winningLine:(NSNumber *)nodeOne node2: (NSNumber *)nodeTwo node3: (NSNumber *)nodeThree
@@ -223,19 +242,19 @@ static int const kMaxBet = 10;
     {
         switch (nodeOne.intValue) {
             case 1: //7
-                return 1000;
+                return 100;
                 break;
             case 2: //bell
-                return 600;
+                return 60;
                 break;
             case 3: //bar
-                return 300;
+                return 30;
                 break;
             case 4: //watermellon
-                return 200;
+                return 20;
                 break;
             case 5: //cherry
-                return 100;
+                return 10;
                 break;
             default:
                 break;
