@@ -12,7 +12,7 @@ static int const kMaxPulls = 5;
 
 @implementation GameModel{
     //private ivars
-    int _amount;
+    //int _amount;
     int _pullsLeft;
     
     Reel *_leftReel;
@@ -33,6 +33,7 @@ static int const kMaxPulls = 5;
     
     // Reels //
     // setup reels
+    [Reel initStatic];
     _leftReel = [[Reel alloc] init:0];
     _middleReel = [[Reel alloc] init:1];
     _rightReel = [[Reel alloc] init:2];
@@ -116,6 +117,9 @@ static int const kMaxPulls = 5;
         // check for winnings
         if([self didWin])
         {
+            // calc results
+            CGFloat winnings = [self didWin];
+            _amount += winnings;
             // display results
             
         }
@@ -185,13 +189,69 @@ static int const kMaxPulls = 5;
 }
 
 // private
--(Boolean)didWin
+-(CGFloat)didWin
 {
+    CGFloat winnings = 0;
+    
     for(int i = 1; i < 4; i++)
     {
         NSLog(@"Line %d,|%@|%@|%@|",i,_leftReel.nodeNumbers[i],_middleReel.nodeNumbers[i],_rightReel.nodeNumbers[i]);
     }
-    return false;
+    //check middle line
+    winnings += [self winningLine:_leftReel.nodeNumbers[2] node2:_middleReel.nodeNumbers[2] node3:_rightReel.nodeNumbers[2]];
+    //check upper line
+    winnings += [self winningLine:_leftReel.nodeNumbers[1] node2:_middleReel.nodeNumbers[1] node3:_rightReel.nodeNumbers[1]];
+    //check lower line
+    winnings += [self winningLine:_leftReel.nodeNumbers[3] node2:_middleReel.nodeNumbers[3] node3:_rightReel.nodeNumbers[3]];
+    //check descending diagonal line
+    winnings += [self winningLine:_leftReel.nodeNumbers[1] node2:_middleReel.nodeNumbers[2] node3:_rightReel.nodeNumbers[3]];
+    //check accending diagonal line
+    winnings += [self winningLine:_leftReel.nodeNumbers[3] node2:_middleReel.nodeNumbers[2] node3:_rightReel.nodeNumbers[1]];
+    NSLog(@"total winnings: %f",winnings);
+    return winnings;
+}
+
+-(CGFloat)winningLine:(NSNumber *)nodeOne node2: (NSNumber *)nodeTwo node3: (NSNumber *)nodeThree
+{
+    
+    NSLog(@"Checking, |%d|%d|%d|",nodeOne.intValue,nodeTwo.intValue,nodeThree.intValue);
+    int winnings = 0;
+    if(nodeOne.intValue == nodeTwo.intValue && nodeTwo.intValue == nodeThree.intValue)
+    {
+        switch (nodeOne.intValue) {
+            case 1: //7
+                return 1000;
+                break;
+            case 2: //bell
+                return 600;
+                break;
+            case 3: //bar
+                return 300;
+                break;
+            case 4: //watermellon
+                return 200;
+                break;
+            case 5: //cherry
+                return 100;
+                break;
+            default:
+                break;
+        }
+    }
+    //if one or more are a cherry is a cherry (5)
+    /*if(nodeOne.intValue == 5)
+    {
+        winnings += 25;
+    }
+    if(nodeTwo.intValue == 5)
+    {
+        winnings += 25;
+    }
+    if(nodeThree.intValue == 5)
+    {
+        winnings += 25;
+    }*/
+    return winnings;
 }
 
 -(void) notifyGameDidEnd{

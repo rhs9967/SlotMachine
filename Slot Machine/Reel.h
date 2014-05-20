@@ -21,6 +21,7 @@
 @property Boolean spinning;
 
 //set up
++(void)initStatic;
 -(id)init:(CGFloat)order;
 -(NSMutableArray *)createReel;
 

@@ -17,6 +17,12 @@ static CGFloat const kBarChance = 0.45;
 static CGFloat const kWatermelonChance = 0.70;
 static CGFloat const kCherryChance = 1;
 
+static NSNumber *k7Num;
+static NSNumber *kBellNum;
+static NSNumber *kBarNum;
+static NSNumber *kWatermellonNum;
+static NSNumber *kCherryNum;
+
 static int const kNumOnReel = 5;
 static CGFloat const kOffScreen = -115;
 static CGFloat const kTop = 460;
@@ -29,6 +35,15 @@ static CGFloat const kSpinTime = 2.75;
 
 @implementation Reel{
     AVAudioPlayer *_spinSound;
+}
+
++(void)initStatic
+{
+    k7Num = @1;
+    kBellNum = @2;
+    kBarNum = @3;
+    kWatermellonNum = @4;
+    kCherryNum = @5;
 }
 
 -(id)init:(CGFloat)order
@@ -77,28 +92,28 @@ static CGFloat const kSpinTime = 2.75;
     if(random < k7Chance)
     {
         image = @"7.png";
-        num = @1;
+        num = k7Num;
     }
     else if(random < kBellChance)
     {
         image = @"Bell.png";
-        num = @2;
+        num = kBellNum;
     }
     else if (random < kBarChance)
     {
         image = @"Bar.png";
-        num = @3;
+        num = kBarNum;
     }
     else if(random < kWatermelonChance)
     {
         image = @"Watermelon.png";
-        num = @4;
+        num = kWatermellonNum;
     }
     else
     {
         //cherry
         image = @"Cherry.png";
-        num = @5;
+        num = kCherryNum;
     }
     
     //make a new SKSpriteNode to insert into the array
