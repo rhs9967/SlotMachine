@@ -107,15 +107,16 @@
     
     
     // load reel atlas
-    SKTextureAtlas *reelAtlas = [SKTextureAtlas atlasNamed:@"Reel"];
+    //SKTextureAtlas *reelAtlas = [SKTextureAtlas atlasNamed:@"Reel"];
     
-    NSArray *reelTextureNames = [reelAtlas textureNames];
-    _reelTextures = [NSMutableArray array];
+    //NSArray *reelTextureNames = [reelAtlas textureNames];
+    //_reelTextures = [NSMutableArray array];
     
-    for (NSString *name in reelTextureNames) {
-        SKTexture *texture = [reelAtlas textureNamed:name];
-        [_reelTextures addObject:texture];
-    }
+    //for (NSString *name in reelTextureNames) {
+    //    SKTexture *texture = [reelAtlas textureNamed:name];
+    //    [_reelTextures addObject:texture];
+    //}
+    
     
     // play bgAudio
     // play background music

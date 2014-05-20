@@ -24,18 +24,21 @@
         
         // myLabel
         myLabel.text = @"Slot Machine";
-        myLabel.fontSize = 75;
+        myLabel.fontName = @"BudmoJiggler-Regular";
+        myLabel.fontSize = 90;
         myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
                                        CGRectGetMidY(self.frame));
         
         // name1Label
         name1Label.text = @"Carl Milazzo";
+        name1Label.fontName = @"BudmoJiggler-Regular";
         name1Label.fontSize = 60;
         name1Label.position = CGPointMake(CGRectGetMidX(self.frame),
                                        CGRectGetMidY(self.frame)/2);
         
         // name2Label
         name2Label.text = @"Robert Schrupp";
+        name2Label.fontName = @"BudmoJiggler-Regular";
         name2Label.fontSize = 60;
         name2Label.position = CGPointMake(CGRectGetMidX(self.frame),
                                        CGRectGetMidY(self.frame)/3);
