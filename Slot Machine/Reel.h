@@ -14,13 +14,14 @@
     CGFloat _speed;
     CGFloat _accel;
     CGFloat _curSpinTime;
+    int _order;
 }
 
 @property NSMutableArray *nodeNumbers; //used to check for payout
 @property Boolean spinning;
 
 //set up
--(id)init;
+-(id)init:(CGFloat)order;
 -(NSMutableArray *)createReel;
 
 //gameplay

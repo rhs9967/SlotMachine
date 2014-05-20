@@ -25,13 +25,13 @@ static CGFloat const kMaxSpeed = 115;
 static CGFloat const kMinAccel = .5;
 static int const kRangeAccel = .2;
 
-static CGFloat const kSpinTime = 5;
+static CGFloat const kSpinTime = 2.75;
 
 @implementation Reel{
     AVAudioPlayer *_spinSound;
 }
 
--(id)init
+-(id)init:(CGFloat)order
 {
     self = [super init];
     
@@ -41,6 +41,8 @@ static CGFloat const kSpinTime = 5;
     // setup sound
     NSURL *spinURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"spin1" ofType:@"wav"]];
     _spinSound = [[AVAudioPlayer alloc] initWithContentsOfURL:spinURL error:nil];
+    
+    _order = order;
     
     //setup standard images
     [self createReel];
@@ -122,7 +124,6 @@ static CGFloat const kSpinTime = 5;
         CGFloat random = ((double)arc4random() / ARC4RANDOM_MAX);
         _accel = (random * kRangeAccel)+kMinAccel;
         _curSpinTime = 0;
-        
         // play sound
         [_spinSound setNumberOfLoops: -1];
         [_spinSound play];
@@ -152,14 +153,15 @@ static CGFloat const kSpinTime = 5;
             SKSpriteNode *Node = (SKSpriteNode *)_reelNodes[i];
             
             //accelerate
-            if(_speed < kMaxSpeed)
+            _speed = kMaxSpeed;
+            /*if(_speed < kMaxSpeed)
             {
                 _speed = _speed + _accel;
             }
             else
             {
                 _speed = kMaxSpeed;
-            }
+            }*/
             //move
             Node.position = CGPointMake(Node.position.x, Node.position.y-_speed);
             
@@ -179,7 +181,7 @@ static CGFloat const kSpinTime = 5;
                     [self createNode];
                     [self addChild:(SKSpriteNode *)_reelNodes[0]];
                     
-                    if(_curSpinTime >= kSpinTime)
+                    if(_curSpinTime >= kSpinTime+_order)
                     {
                         [self stop];
                     }

@@ -33,9 +33,9 @@ static int const kMaxPulls = 5;
     
     // Reels //
     // setup reels
-    _leftReel = [[Reel alloc] init];
-    _middleReel = [[Reel alloc] init];
-    _rightReel = [[Reel alloc] init];
+    _leftReel = [[Reel alloc] init:0];
+    _middleReel = [[Reel alloc] init:1];
+    _rightReel = [[Reel alloc] init:2];
     
     // positions
     CGPoint left = CGPointMake(pos.x - size.width/3, pos.y-230);
