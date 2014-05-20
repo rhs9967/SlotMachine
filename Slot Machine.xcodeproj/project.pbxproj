@@ -15,6 +15,8 @@
 		3F22F8481928053B005E5881 /* smoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F22F8451928053B005E5881 /* smoke.sks */; };
 		3F22F8491928053B005E5881 /* spark.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F22F8461928053B005E5881 /* spark.png */; };
 		3F22F853192806B9005E5881 /* spark1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F22F852192806B9005E5881 /* spark1.sks */; };
+		3F2A762A192BDA7F0064BBA3 /* bet_minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2A7628192BDA7F0064BBA3 /* bet_minus.png */; };
+		3F2A762B192BDA7F0064BBA3 /* bet_plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2A7629192BDA7F0064BBA3 /* bet_plus.png */; };
 		3F65B4B61915613900AC931E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F65B4B51915613900AC931E /* Foundation.framework */; };
 		3F65B4B81915613900AC931E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F65B4B71915613900AC931E /* CoreGraphics.framework */; };
 		3F65B4BA1915613900AC931E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F65B4B91915613900AC931E /* UIKit.framework */; };
@@ -65,6 +67,8 @@
 		3F22F8451928053B005E5881 /* smoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = smoke.sks; sourceTree = "<group>"; };
 		3F22F8461928053B005E5881 /* spark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = spark.png; sourceTree = "<group>"; };
 		3F22F852192806B9005E5881 /* spark1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = spark1.sks; sourceTree = "<group>"; };
+		3F2A7628192BDA7F0064BBA3 /* bet_minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bet_minus.png; sourceTree = "<group>"; };
+		3F2A7629192BDA7F0064BBA3 /* bet_plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bet_plus.png; sourceTree = "<group>"; };
 		3F65B4B21915613900AC931E /* Slot Machine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Slot Machine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F65B4B51915613900AC931E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3F65B4B71915613900AC931E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -247,6 +251,8 @@
 			children = (
 				DAF94FED1919422B002BE1B9 /* reel_Images */,
 				3F65B4FE1915722B00AC931E /* Reel.atlas */,
+				3F2A7628192BDA7F0064BBA3 /* bet_minus.png */,
+				3F2A7629192BDA7F0064BBA3 /* bet_plus.png */,
 				3F65B4FC19156D4600AC931E /* reelSpin.png */,
 				3F65B4FA191569F100AC931E /* Spaceship.png */,
 				3F65B4F8191569DC00AC931E /* slotmachine-symbol-overlay.png */,
@@ -356,12 +362,14 @@
 				3F65B4F9191569DC00AC931E /* slotmachine-symbol-overlay.png in Resources */,
 				3F22F8471928053B005E5881 /* fire.sks in Resources */,
 				3F65B4FB191569F100AC931E /* Spaceship.png in Resources */,
+				3F2A762B192BDA7F0064BBA3 /* bet_plus.png in Resources */,
 				3F65B4CB1915613900AC931E /* Main.storyboard in Resources */,
 				3F22F83C1927FACE005E5881 /* casino_bg1.mp3 in Resources */,
 				3F22F853192806B9005E5881 /* spark1.sks in Resources */,
 				3F22F8401927FF5F005E5881 /* casino_bg3.wav in Resources */,
 				DAF94FF61919425D002BE1B9 /* Cherry.png in Resources */,
 				DAF94FF31919425D002BE1B9 /* 7.png in Resources */,
+				3F2A762A192BDA7F0064BBA3 /* bet_minus.png in Resources */,
 				DAF94FF71919425D002BE1B9 /* Watermelon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

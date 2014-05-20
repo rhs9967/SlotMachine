@@ -9,6 +9,8 @@
 #import "GameModel.h"
 
 static int const kMaxPulls = 5;
+static int const kMinBet = 1;
+static int const kMaxBet = 10;
 
 @implementation GameModel{
     //private ivars
@@ -30,6 +32,7 @@ static int const kMaxPulls = 5;
     self = [super init];
     
     _pullsLeft = kMaxPulls;
+    _bet = kMinBet;
     
     // Reels //
     // setup reels

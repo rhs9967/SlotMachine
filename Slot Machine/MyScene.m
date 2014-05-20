@@ -15,6 +15,9 @@
     GameModel *_gameModel;
     
     SKSpriteNode *_overlay;
+    SKLabelNode *_betAmount;
+    SKSpriteNode *_betIncrease;
+    SKSpriteNode *_betDecrease;
     
     AVAudioPlayer *_bgAudio;
     AVAudioPlayer *_bgAudio1;
@@ -69,19 +72,39 @@
 }
 
 -(void)setup{
+    // overlay
     _overlay = [SKSpriteNode spriteNodeWithImageNamed:@"slotmachine-symbol-overlay"];
     _overlay.position = CGPointMake(_overlay.size.width,
                                    self.size.height/2);
     // Scale up
     _overlay.xScale = 1.5;
     _overlay.yScale = 1.5;
+    //add overlay
+    [self addChild:_overlay];
+    
+    // Bet Amount
+    _betAmount = [SKLabelNode labelNodeWithFontNamed:@"GillSans-Bold"];
+    _betAmount.fontSize = 75;
+    _betAmount.position = CGPointMake(_overlay.position.x, 30);
+    [self addChild:_betAmount];
+    
+    // Bet Increase
+    _betIncrease = [SKSpriteNode spriteNodeWithImageNamed:@"bet_plus.png"];
+    _betIncrease.position = CGPointMake(_betAmount.position.x + (_betIncrease.frame.size.width*1.5), _betAmount.position.y + 20);
+    _betIncrease.name = @"betPlus";
+    [self addChild:_betIncrease];
+    
+    // Bet Decrease
+    _betDecrease = [SKSpriteNode spriteNodeWithImageNamed:@"bet_minus.png"];
+    _betDecrease.position = CGPointMake(_betAmount.position.x - (_betDecrease.frame.size.width*1.5), _betAmount.position.y + 20);
+    _betDecrease.name = @"betMinus";
+    [self addChild:_betDecrease];
     
     //create gameModel
     _gameModel = [[GameModel alloc] init:_overlay.size :_overlay.position];
     [self addChild:_gameModel];
     
-    //add overlay
-    [self addChild:_overlay];
+    
     
     // load reel atlas
     SKTextureAtlas *reelAtlas = [SKTextureAtlas atlasNamed:@"Reel"];
@@ -113,10 +136,19 @@
         CGPoint location = [touch locationInNode:self];
         //NSLog(@"Touch = (%f, %f)",location.x, location.y);
         
+        SKNode *node = [self nodeAtPoint:location];
+        
         // if Player Stage
         if (_gameModel.gameStage == kGameStagePlayer) {
             // inform gameModel of touch
             [_gameModel checkTouch:location :NO];
+            
+            // if touch was on betting buttons
+            if ([node.name isEqualToString:@"betPlus"]) {
+                // do stuff
+            } else if ([node.name isEqualToString:@"betMinus"]) {
+                // do stuff
+            }
         }
         
         // if Results Stage
@@ -166,7 +198,9 @@
     // NSLog(@"delta=%f",dt);
     
     [_gameModel updateGameStage:dt];
-    //[_lever update];
+    
+    // Bet Amound
+    _betAmount.text = [NSString stringWithFormat:@"$%d", _gameModel.bet];
 }
 
 
