@@ -28,6 +28,8 @@
     double _lastTime;
     
     BOOL _leverTouched;
+    BOOL _plusButtonTouched;
+    BOOL _minusButtonTouched;
 }
 
 -(id)initWithSize:(CGSize)size {    
@@ -146,9 +148,11 @@
             
             // if touch was on betting buttons
             if ([node.name isEqualToString:@"betPlus"]) {
-                // do stuff
+                // begin button press
+                _plusButtonTouched = YES;
             } else if ([node.name isEqualToString:@"betMinus"]) {
-                // do stuff
+                // begin button press
+                _minusButtonTouched = YES;
             }
         }
         
