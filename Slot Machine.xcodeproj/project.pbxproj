@@ -17,6 +17,7 @@
 		3F22F853192806B9005E5881 /* spark1.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3F22F852192806B9005E5881 /* spark1.sks */; };
 		3F2A762A192BDA7F0064BBA3 /* bet_minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2A7628192BDA7F0064BBA3 /* bet_minus.png */; };
 		3F2A762B192BDA7F0064BBA3 /* bet_plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 3F2A7629192BDA7F0064BBA3 /* bet_plus.png */; };
+		3F2A762E192BE78F0064BBA3 /* EndScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 3F2A762D192BE78F0064BBA3 /* EndScene.m */; };
 		3F65B4B61915613900AC931E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F65B4B51915613900AC931E /* Foundation.framework */; };
 		3F65B4B81915613900AC931E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F65B4B71915613900AC931E /* CoreGraphics.framework */; };
 		3F65B4BA1915613900AC931E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F65B4B91915613900AC931E /* UIKit.framework */; };
@@ -70,6 +71,8 @@
 		3F22F852192806B9005E5881 /* spark1.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = spark1.sks; sourceTree = "<group>"; };
 		3F2A7628192BDA7F0064BBA3 /* bet_minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bet_minus.png; sourceTree = "<group>"; };
 		3F2A7629192BDA7F0064BBA3 /* bet_plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bet_plus.png; sourceTree = "<group>"; };
+		3F2A762C192BE78F0064BBA3 /* EndScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndScene.h; sourceTree = "<group>"; };
+		3F2A762D192BE78F0064BBA3 /* EndScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndScene.m; sourceTree = "<group>"; };
 		3F65B4B21915613900AC931E /* Slot Machine.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Slot Machine.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3F65B4B51915613900AC931E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		3F65B4B71915613900AC931E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -210,6 +213,8 @@
 				3FA9EB2319195EB600C2D587 /* Lever.m */,
 				3F65B4F11915655F00AC931E /* TitleScene.h */,
 				3F65B4F21915655F00AC931E /* TitleScene.m */,
+				3F2A762C192BE78F0064BBA3 /* EndScene.h */,
+				3F2A762D192BE78F0064BBA3 /* EndScene.m */,
 				3F65B4D41915613900AC931E /* Images.xcassets */,
 				3F22F8431928053B005E5881 /* Particles */,
 				3F22F8381927FA80005E5881 /* Sounds */,
@@ -400,6 +405,7 @@
 				3F65B4CE1915613900AC931E /* ViewController.m in Sources */,
 				3F65B4C81915613900AC931E /* AppDelegate.m in Sources */,
 				3F65B4C41915613900AC931E /* main.m in Sources */,
+				3F2A762E192BE78F0064BBA3 /* EndScene.m in Sources */,
 				3FA9EB2119195D9F00C2D587 /* GameModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

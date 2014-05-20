@@ -7,6 +7,7 @@
 //
 
 #import "MyScene.h"
+#import "EndScene.h"
 #import "GameModel.h"
 #import "Lever.h"
 #import <AVFoundation/AVFoundation.h>
