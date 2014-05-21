@@ -9,5 +9,5 @@
 #import <SpriteKit/SpriteKit.h>
 
 @interface EndScene : SKScene
-
+-(id)initWithSize:(CGSize)size score:(CGFloat)score;
 @end

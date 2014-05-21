@@ -21,6 +21,7 @@
     SKSpriteNode *_betIncrease;
     SKSpriteNode *_betDecrease;
     
+    
     AVAudioPlayer *_bgAudio;
     AVAudioPlayer *_bgAudio1;
     AVAudioPlayer *_bgAudio2;
@@ -249,7 +250,7 @@
 
 #pragma mark - Notifications
 -(void) handleNotificationGameDidEnd:(NSNotification *)notification{
-    NSDictionary *userInfo = notification.userInfo;
+    /*NSDictionary *userInfo = notification.userInfo;
     NSNumber *num = userInfo[@"winnings"]; // the key for the dictionary
     NSString *message = [NSString stringWithFormat:@"Winnings: $%@", num];//NSString(@"Winnings: %f", [num intValue]);
     
@@ -259,7 +260,12 @@
                           delegate:self
                           cancelButtonTitle:Nil
                           otherButtonTitles:@"Play Again", nil];
-    [alert show];
+    [alert show];*/
+    // Create and configure the scene
+    SKScene * endScene = [[EndScene alloc] initWithSize:self.size score:_gameModel.amount];
+    
+    SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+    [self.view presentScene:endScene transition:reveal];
 }
 
 @end

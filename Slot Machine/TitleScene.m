@@ -27,21 +27,21 @@
         myLabel.fontName = @"BudmoJiggler-Regular";
         myLabel.fontSize = 90;
         myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
-                                       CGRectGetMidY(self.frame));
+                                       CGRectGetMidY(self.frame)*4/3);
         
         // name1Label
         name1Label.text = @"Carl Milazzo";
         name1Label.fontName = @"BudmoJiggler-Regular";
         name1Label.fontSize = 60;
         name1Label.position = CGPointMake(CGRectGetMidX(self.frame),
-                                       CGRectGetMidY(self.frame)/2);
+                                       CGRectGetMidY(self.frame)*3/5);
         
         // name2Label
         name2Label.text = @"Robert Schrupp";
         name2Label.fontName = @"BudmoJiggler-Regular";
         name2Label.fontSize = 60;
         name2Label.position = CGPointMake(CGRectGetMidX(self.frame),
-                                       CGRectGetMidY(self.frame)/3);
+                                       CGRectGetMidY(self.frame)*2/5);
         
         [self addChild:myLabel];
         [self addChild:name1Label];

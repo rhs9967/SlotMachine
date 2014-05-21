@@ -131,7 +131,7 @@ static int const kBetIncrement = 1;
         _gameStage = kGameStagePlayer;
         _pullsLeft--;
         NSLog(@"Pulls Left: %d",_pullsLeft);
-        if(_pullsLeft <= 0)
+        if(_pullsLeft <= 4)
         {
             [self addChild:_spark1];
             [self notifyGameDidEnd];
