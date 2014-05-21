@@ -16,6 +16,7 @@
     GameModel *_gameModel;
     
     SKSpriteNode *_overlay;
+    SKSpriteNode *_background;
     SKLabelNode *_betAmount;
     SKSpriteNode *_betIncrease;
     SKSpriteNode *_betDecrease;
@@ -37,7 +38,8 @@
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
         // background color
-        self.backgroundColor = [SKColor colorWithRed:0.0 green:0.4 blue:0.0 alpha:1.0];
+        //self.backgroundColor = [SKColor colorWithRed:0.0 green:0.4 blue:0.0 alpha:1.0];
+        self.backgroundColor = [SKColor darkGrayColor];
         
         // AVAudioplayer //
         // URLs
@@ -75,6 +77,15 @@
 }
 
 -(void)setup{
+    
+    //background
+    _background = [SKSpriteNode spriteNodeWithImageNamed:@"background"];
+    
+    _background.position = CGPointMake(self.size.width/2,
+                                       self.size.height/2);
+    
+    [self addChild:_background];
+    
     // overlay
     _overlay = [SKSpriteNode spriteNodeWithImageNamed:@"slotmachine-symbol-overlay"];
     _overlay.position = CGPointMake(_overlay.size.width,
@@ -84,6 +95,8 @@
     _overlay.yScale = 1.5;
     //add overlay
     [self addChild:_overlay];
+    
+    
     
     // Bet Amount
     _betAmount = [SKLabelNode labelNodeWithFontNamed:@"GillSans-Bold"];
