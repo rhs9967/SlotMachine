@@ -44,16 +44,35 @@
                                           CGRectGetMidY(self.frame));
         
         // PlayAgain
-        playAgain = [SKSpriteNode spriteNodeWithImageNamed:@"bet_plus.png"];
+        playAgain = [SKSpriteNode spriteNodeWithImageNamed:@"Button"];
         playAgain.position = CGPointMake(CGRectGetMidX(self.frame)*3/5,CGRectGetMidY(self.frame)*3/5);
         playAgain.name = @"playAgain";
         [self addChild:playAgain];
         
+        SKLabelNode *playAgainText = [SKLabelNode labelNodeWithFontNamed:@"BudmoJiggler-Regular"];
+        
+        playAgainText.text = @"Play Again";
+        playAgainText.name = @"playAgain";
+        playAgainText.fontSize = 50;
+        playAgainText.fontColor = [SKColor blackColor];
+        playAgainText.position = CGPointMake(CGRectGetMidX(self.frame)*3/5,CGRectGetMidY(self.frame)*3/5-15);
+        [self addChild:playAgainText];
+        
+        
         // MainMenu button
-        mainMenu = [SKSpriteNode spriteNodeWithImageNamed:@"bet_minus.png"];
+        mainMenu = [SKSpriteNode spriteNodeWithImageNamed:@"Button"];
         mainMenu.position = CGPointMake(CGRectGetMidX(self.frame)*7/5,CGRectGetMidY(self.frame)*3/5);
         mainMenu.name = @"mainMenu";
         [self addChild:mainMenu];
+        
+        SKLabelNode *mainMenuText = [SKLabelNode labelNodeWithFontNamed:@"BudmoJiggler-Regular"];
+        
+        mainMenuText.text = @"Main Menu";
+        mainMenuText.name = @"mainMenu";
+        mainMenuText.fontSize = 50;
+        mainMenuText.fontColor = [SKColor blackColor];
+        mainMenuText.position = CGPointMake(CGRectGetMidX(self.frame)*7/5,CGRectGetMidY(self.frame)*3/5-15);
+        [self addChild:mainMenuText];
         
         
         [self addChild:myLabel];
