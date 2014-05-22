@@ -72,8 +72,6 @@ static int const kLeverHeight = 300;
         knobDistance = -percentChange*3;
     }
     
-    //NSLog(@"distance: %f",_distance);
-    
     // set new CGRects
     CGRect newKnobCircle = CGRectMake(knobDistance, newKnobHeight, knobRadius, knobRadius);
     _knob.path = [UIBezierPath bezierPathWithOvalInRect:newKnobCircle].CGPath;

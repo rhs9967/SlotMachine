@@ -42,13 +42,14 @@
     BOOL _plusButtonTouched;
     BOOL _minusButtonTouched;
     BOOL _shouldFlash;
+    
+    SKEmitterNode *_spark1; 
 }
 
 -(id)initWithSize:(CGSize)size {    
     if (self = [super initWithSize:size]) {
         /* Setup your scene here */
         // background color
-        //self.backgroundColor = [SKColor colorWithRed:0.0 green:0.4 blue:0.0 alpha:1.0];
         self.backgroundColor = [SKColor darkGrayColor];
         
         // AVAudioplayer //
@@ -74,16 +75,6 @@
          selector:@selector(handleNotificationGameDidEnd:)
          name:kNotificationGameDidEnd
          object:_gameModel];
-        /*
-        SKLabelNode *myLabel = [SKLabelNode labelNodeWithFontNamed:@"Chalkduster"];
-        
-        myLabel.text = @"Hello, World!";
-        myLabel.fontSize = 30;
-        myLabel.position = CGPointMake(CGRectGetMidX(self.frame),
-                                       CGRectGetMidY(self.frame));
-        
-        [self addChild:myLabel];
-         */
     }
     return self;
 }
@@ -145,6 +136,16 @@
     _gameModel = [[GameModel alloc] init:_overlay.size :_overlay.position];
     [self addChild:_gameModel];
     
+    // EmitterNodes
+    _spark1 = [NSKeyedUnarchiver unarchiveObjectWithFile:
+               [[NSBundle mainBundle] pathForResource:@"spark1"
+                                               ofType:@"sks"]];
+    _spark1.position = CGPointMake(_overlay.position.x, _overlay.position.y);
+    _spark1.zPosition = 10;
+    _spark1.name = @"spark1";
+    //_spark1.targetNode = self->_overlay;
+    [self addChild:_spark1];
+    
     // play bgAudio
     // play background music
     [_bgAudio setNumberOfLoops: -1];
@@ -162,7 +163,7 @@
         
         // get touch position
         CGPoint location = [touch locationInNode:self];
-        //NSLog(@"Touch = (%f, %f)",location.x, location.y);
+
         SKNode *node = [self nodeAtPoint:location];
         
         // if Player Stage
@@ -183,11 +184,6 @@
                 _betDecrease.yScale = .9;
             }
         }
-        
-        // if Results Stage
-        //if (_gameModel.gameStage == kGameStageResult) {
-         //   [_gameModel reset];
-        //}
     }
 }
 
@@ -195,7 +191,6 @@
 {
     for (UITouch *touch in touches) {
         
-        //UITouch* touch = [touches anyObject];
         CGPoint location = [touch locationInNode:self];
         
         // if Player Stage
@@ -245,10 +240,8 @@
     /* Called before each frame is rendered */
     // calculate deltaTime
     double time = (double)CFAbsoluteTimeGetCurrent();
-    // NSLog(@"time=%f",time);
     float dt = time - _lastTime;
     _lastTime = time;
-    // NSLog(@"delta=%f",dt);
     
     [_gameModel updateGameStage:dt];
     
@@ -263,6 +256,7 @@
         _flashAmount = 11;
         _flasher = 10;
         _gameModel.shouldFlash = NO;
+        [self addChild:_spark1];
         [_winAudio play];
     }
     
@@ -280,6 +274,7 @@
         }
     } else {
         _latestWin.text = @"";
+        [_spark1 removeFromParent];
     }
 }
 
@@ -287,17 +282,6 @@
 
 #pragma mark - Notifications
 -(void) handleNotificationGameDidEnd:(NSNotification *)notification{
-    /*NSDictionary *userInfo = notification.userInfo;
-    NSNumber *num = userInfo[@"winnings"]; // the key for the dictionary
-    NSString *message = [NSString stringWithFormat:@"Winnings: $%@", num];//NSString(@"Winnings: %f", [num intValue]);
-    
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:@"GameOver"
-                          message: message
-                          delegate:self
-                          cancelButtonTitle:Nil
-                          otherButtonTitles:@"Play Again", nil];
-    [alert show];*/
     // Create and configure the scene
     SKAction *wait = [SKAction waitForDuration:1];
     SKAction *nextScene = [SKAction runBlock:^{

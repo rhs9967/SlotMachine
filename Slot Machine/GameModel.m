@@ -16,7 +16,6 @@ static int const kStartAmount = 9;
 
 @implementation GameModel{
     //private ivars
-    //int _amount;
     int _pullsLeft;
     
     Reel *_leftReel;
@@ -24,8 +23,6 @@ static int const kStartAmount = 9;
     Reel *_rightReel;
     
     Lever *_lever;
-    
-    SKEmitterNode *_spark1;    
 }
 
 // public
@@ -72,16 +69,6 @@ static int const kStartAmount = 9;
     // add lever
     [self addChild:_lever];
     
-    // EmitterNodes
-    _spark1 = [NSKeyedUnarchiver unarchiveObjectWithFile:
-               [[NSBundle mainBundle] pathForResource:@"spark1"
-                                               ofType:@"sks"]];
-    _spark1.position = CGPointMake(pos.x, pos.y);
-    _spark1.zPosition = 10;
-    _spark1.name = @"spark1";
-    //_spark1.targetNode = self->_overlay;
-    [self addChild:_spark1];
-    
     _amount = kStartAmount;
     
     return self;
@@ -94,13 +81,12 @@ static int const kStartAmount = 9;
     
     // Player stage
     if (_gameStage == kGameStagePlayer) {
-        [_spark1 removeFromParent];
         return;
     } // end player stage
     
     // Spin stage
     if (_gameStage == kGameStageSpin) {
-        NSLog(@"GameModel - GameStageSpin Active: SPINNING!");
+        //NSLog(@"GameModel - GameStageSpin Active: SPINNING!");
         
         // if reels have actions, continue // SKNode
         [_leftReel update:dt];
@@ -128,11 +114,9 @@ static int const kStartAmount = 9;
             _winnings = [self didWin];
             _amount += _winnings;
             _shouldFlash = YES;
-            
-            [self addChild:_spark1];
         }
         _pullsLeft--;
-        NSLog(@"Pulls Left: %d",_pullsLeft);
+        //NSLog(@"Pulls Left: %d",_pullsLeft);
         
         // check if game ended
         if(_pullsLeft == 0 || _amount <= 0)
@@ -162,7 +146,6 @@ static int const kStartAmount = 9;
 } // end updateGameStage
 
 -(void)reset{
-    [_spark1 removeFromParent];
     _gameStage = kGameStagePlayer;
     _pullsLeft = kMaxPulls;
     _amount = kStartAmount;
@@ -250,7 +233,7 @@ static int const kStartAmount = 9;
     
     for(int i = 1; i < 4; i++)
     {
-        NSLog(@"Line %d,|%@|%@|%@|",i,_leftReel.nodeNumbers[i],_middleReel.nodeNumbers[i],_rightReel.nodeNumbers[i]);
+        //NSLog(@"Line %d,|%@|%@|%@|",i,_leftReel.nodeNumbers[i],_middleReel.nodeNumbers[i],_rightReel.nodeNumbers[i]);
     }
     //check middle line
     winnings += [self winningLine:_leftReel.nodeNumbers[2] node2:_middleReel.nodeNumbers[2] node3:_rightReel.nodeNumbers[2]];
@@ -262,14 +245,14 @@ static int const kStartAmount = 9;
     winnings += [self winningLine:_leftReel.nodeNumbers[1] node2:_middleReel.nodeNumbers[2] node3:_rightReel.nodeNumbers[3]];
     //check accending diagonal line
     winnings += [self winningLine:_leftReel.nodeNumbers[3] node2:_middleReel.nodeNumbers[2] node3:_rightReel.nodeNumbers[1]];
-    NSLog(@"total winnings: %f",winnings);
+    //NSLog(@"total winnings: %f",winnings);
     return winnings * _bet;
 }
 
 -(CGFloat)winningLine:(NSNumber *)nodeOne node2: (NSNumber *)nodeTwo node3: (NSNumber *)nodeThree
 {
     
-    NSLog(@"Checking, |%d|%d|%d|",nodeOne.intValue,nodeTwo.intValue,nodeThree.intValue);
+    //NSLog(@"Checking, |%d|%d|%d|",nodeOne.intValue,nodeTwo.intValue,nodeThree.intValue);
     int winnings = 0;
     if(nodeOne.intValue == nodeTwo.intValue && nodeTwo.intValue == nodeThree.intValue)
     {
@@ -293,19 +276,6 @@ static int const kStartAmount = 9;
                 break;
         }
     }
-    //if one or more are a cherry is a cherry (5)
-    /*if(nodeOne.intValue == 5)
-    {
-        winnings += 25;
-    }
-    if(nodeTwo.intValue == 5)
-    {
-        winnings += 25;
-    }
-    if(nodeThree.intValue == 5)
-    {
-        winnings += 25;
-    }*/
     return winnings;
 }
 

@@ -107,7 +107,7 @@
         
         // get touch position
         CGPoint location = [touch locationInNode:self];
-        //NSLog(@"Touch = (%f, %f)",location.x, location.y);
+
         SKNode *node = [self nodeAtPoint:location];
         
         // if touch was on betting buttons
@@ -144,7 +144,7 @@
         
         // get touch position
         CGPoint location = [touch locationInNode:self];
-        //NSLog(@"Touch = (%f, %f)",location.x, location.y);
+
         SKNode *node = [self nodeAtPoint:location];
         
 
