@@ -9,6 +9,7 @@
 #import "EndScene.h"
 #import "TitleScene.h"
 #import "MyScene.h"
+#import <AVFoundation/AVFoundation.h>
 
 @implementation EndScene
 {
@@ -18,6 +19,7 @@
     BOOL _playAgainPressed;
     BOOL _mainMenuPressed;
     
+    AVAudioPlayer *_winAudio;    
     
     SKEmitterNode *endParticle;
     
@@ -41,8 +43,8 @@
                                        CGRectGetMidY(self.frame)*7/5);
         
         // name1Label
-        name1Label.text = [NSString stringWithFormat:@"%.00f!!!!",score];
-        name1Label.fontSize = 60;
+        name1Label.text = [NSString stringWithFormat:@"$%.00f!!!!",score];
+        name1Label.fontSize = 80;
         name1Label.position = CGPointMake(CGRectGetMidX(self.frame),
                                           CGRectGetMidY(self.frame));
         
@@ -90,6 +92,11 @@
         [self addChild:myLabel];
         [self addChild:name1Label];
         [self addChild:name2Label];
+        
+        // sound
+        NSURL *winURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"win1" ofType:@"mp3"]];
+        _winAudio = [[AVAudioPlayer alloc] initWithContentsOfURL:winURL error:nil];
+        [_winAudio play];
     }
     return self;
 }

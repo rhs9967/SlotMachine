@@ -299,10 +299,17 @@
                           otherButtonTitles:@"Play Again", nil];
     [alert show];*/
     // Create and configure the scene
-    SKScene * endScene = [[EndScene alloc] initWithSize:self.size score:_gameModel.amount];
+    SKAction *wait = [SKAction waitForDuration:1];
+    SKAction *nextScene = [SKAction runBlock:^{
+        SKScene * endScene = [[EndScene alloc] initWithSize:self.size score:_gameModel.amount];
+        
+        SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+        [self.view presentScene:endScene transition:reveal];
+    }];
     
-    SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-    [self.view presentScene:endScene transition:reveal];
+    SKAction *sequence = [SKAction sequence:@[wait, nextScene]];
+    
+    [self runAction:sequence];
 }
 
 @end

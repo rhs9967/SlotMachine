@@ -12,7 +12,7 @@ static int const kMaxPulls = 5;
 static int const kMinBet = 1;
 static int const kMaxBet = 10;
 static int const kBetIncrement = 1;
-static int const kStartAmount = 99;
+static int const kStartAmount = 9;
 
 @implementation GameModel{
     //private ivars
@@ -80,7 +80,7 @@ static int const kStartAmount = 99;
     _spark1.zPosition = 10;
     _spark1.name = @"spark1";
     //_spark1.targetNode = self->_overlay;
-    //[self addChild:_spark1];
+    [self addChild:_spark1];
     
     _amount = kStartAmount;
     
@@ -94,7 +94,7 @@ static int const kStartAmount = 99;
     
     // Player stage
     if (_gameStage == kGameStagePlayer) {
-        //[_spark1 removeFromParent];
+        [_spark1 removeFromParent];
         return;
     } // end player stage
     
@@ -128,20 +128,33 @@ static int const kStartAmount = 99;
             _winnings = [self didWin];
             _amount += _winnings;
             _shouldFlash = YES;
+            
+            [self addChild:_spark1];
         }
-        
-        _gameStage = kGameStagePlayer;
         _pullsLeft--;
         NSLog(@"Pulls Left: %d",_pullsLeft);
         
         // check if game ended
-        if(_pullsLeft == 0)
+        if(_pullsLeft == 0 || _amount <= 0)
         {
             //[self addChild:_spark1];
             [self notifyGameDidEnd];
         } else {
             // adjust amount left for bet
             _amount -= _bet;
+            
+            // check amount
+            while (_amount <= 0) {
+                _bet -= kBetIncrement;
+                _amount += kBetIncrement;
+            }
+            
+            // after adjustment, if the player can't bet anymore, end game
+            if (_bet <= 0) {
+                [self notifyGameDidEnd];
+            } else {
+                _gameStage = kGameStagePlayer;
+            }
         }
         
         
@@ -209,6 +222,12 @@ static int const kStartAmount = 99;
     } else {
         // adjust amount
         _amount -= kBetIncrement;
+    }
+    
+    // if bet causes amount to go negative, reverse everything
+    if (_amount < 0) {
+        _bet -= kBetIncrement;
+        _amount += kBetIncrement;
     }
 }
 
