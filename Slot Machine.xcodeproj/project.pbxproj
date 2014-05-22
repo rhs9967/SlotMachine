@@ -43,6 +43,7 @@
 		3FA9EB2419195EB600C2D587 /* Lever.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA9EB2319195EB600C2D587 /* Lever.m */; };
 		3FD58227192E6EB80032329C /* win1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3FD58226192E6EB80032329C /* win1.mp3 */; };
 		DA4B4475192BDA6B004DBD0A /* budmo jiggler.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA4B4474192BDA6B004DBD0A /* budmo jiggler.ttf */; };
+		DA80C7A0192E65030054568E /* endParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = DA80C79F192E65030054568E /* endParticle.sks */; };
 		DAF94FF31919425D002BE1B9 /* 7.png in Resources */ = {isa = PBXBuildFile; fileRef = DAF94FEE1919425D002BE1B9 /* 7.png */; };
 		DAF94FF41919425D002BE1B9 /* Bar.png in Resources */ = {isa = PBXBuildFile; fileRef = DAF94FEF1919425D002BE1B9 /* Bar.png */; };
 		DAF94FF51919425D002BE1B9 /* Bell.png in Resources */ = {isa = PBXBuildFile; fileRef = DAF94FF01919425D002BE1B9 /* Bell.png */; };
@@ -108,6 +109,7 @@
 		3FA9EB2319195EB600C2D587 /* Lever.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Lever.m; sourceTree = "<group>"; };
 		3FD58226192E6EB80032329C /* win1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = win1.mp3; sourceTree = "<group>"; };
 		DA4B4474192BDA6B004DBD0A /* budmo jiggler.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "budmo jiggler.ttf"; sourceTree = "<group>"; };
+		DA80C79F192E65030054568E /* endParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = endParticle.sks; sourceTree = "<group>"; };
 		DAF94FEE1919425D002BE1B9 /* 7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 7.png; sourceTree = "<group>"; };
 		DAF94FEF1919425D002BE1B9 /* Bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bar.png; sourceTree = "<group>"; };
 		DAF94FF01919425D002BE1B9 /* Bell.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bell.png; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				3F22F852192806B9005E5881 /* spark1.sks */,
+				DA80C79F192E65030054568E /* endParticle.sks */,
 				3F22F8441928053B005E5881 /* fire.sks */,
 				3F22F8451928053B005E5881 /* smoke.sks */,
 				3F22F8461928053B005E5881 /* spark.png */,
@@ -370,6 +373,7 @@
 				DA4B4475192BDA6B004DBD0A /* budmo jiggler.ttf in Resources */,
 				3F22F8491928053B005E5881 /* spark.png in Resources */,
 				3F65B4FD19156D4600AC931E /* reelSpin.png in Resources */,
+				DA80C7A0192E65030054568E /* endParticle.sks in Resources */,
 				DAF94FF41919425D002BE1B9 /* Bar.png in Resources */,
 				3F65B4D51915613900AC931E /* Images.xcassets in Resources */,
 				3F65B4F9191569DC00AC931E /* slotmachine-symbol-overlay.png in Resources */,

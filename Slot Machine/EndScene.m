@@ -18,6 +18,9 @@
     BOOL _playAgainPressed;
     BOOL _mainMenuPressed;
     
+    
+    SKEmitterNode *endParticle;
+    
 }
 
 -(id)initWithSize:(CGSize)size score:(CGFloat)score {
@@ -38,7 +41,7 @@
                                        CGRectGetMidY(self.frame)*7/5);
         
         // name1Label
-        name1Label.text = [NSString stringWithFormat:@"%f!!!!",score];
+        name1Label.text = [NSString stringWithFormat:@"%.00f!!!!",score];
         name1Label.fontSize = 60;
         name1Label.position = CGPointMake(CGRectGetMidX(self.frame),
                                           CGRectGetMidY(self.frame));
@@ -75,6 +78,15 @@
         [self addChild:mainMenuText];
         
         
+        NSString *sparkPath = [[NSBundle mainBundle] pathForResource:@"endParticle" ofType:@"sks"];
+        endParticle = [NSKeyedUnarchiver unarchiveObjectWithFile: sparkPath];
+        
+        endParticle.position = CGPointMake(CGRectGetMidX(self.frame),name1Label.position.y+name1Label.frame.size.width/2);
+        //endParticle.position = CGPointZero;
+        endParticle.zPosition = 0;
+        endParticle.zRotation = 0;
+        //[self addChild:endParticle];
+        
         [self addChild:myLabel];
         [self addChild:name1Label];
         [self addChild:name2Label];
@@ -95,34 +107,15 @@
         if ([node.name isEqualToString:@"playAgain"]) {
             // begin button press
             _playAgainPressed = YES;
+            playAgain.xScale = 0.8;
+            playAgain.yScale = 0.8;
             
         }
         else if ([node.name isEqualToString:@"mainMenu"]) {
             // begin button press
             _mainMenuPressed = YES;
-        }
-    }
-}
-
--(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    for (UITouch *touch in touches) {
-        
-        
-        // get touch position
-        CGPoint location = [touch locationInNode:self];
-        //NSLog(@"Touch = (%f, %f)",location.x, location.y);
-        SKNode *node = [self nodeAtPoint:location];
-        
-        // if touch was on betting buttons
-        if (([node.name isEqualToString:@"playAgain"]&&_playAgainPressed)||([node.name isEqualToString:@"mainMenu"]&&_mainMenuPressed)) {
-            
-            //do nothing
-        }
-        else
-        {
-            _mainMenuPressed = NO;
-            _playAgainPressed = NO;
+            mainMenu.xScale = 0.8;
+            mainMenu.yScale = 0.8;
         }
     }
 }
@@ -131,31 +124,49 @@
 {
     _mainMenuPressed = NO;
     _playAgainPressed = NO;
+    playAgain.xScale = 1;
+    playAgain.yScale = 1;
+    mainMenu.xScale = 1;
+    mainMenu.yScale = 1;
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    if(_mainMenuPressed)
-    {
-        // Create and configure the scene
-        SKScene * titleScene = [[TitleScene alloc] initWithSize:self.size];
+    /* Called when a touch begins */
+    for (UITouch *touch in touches) {
         
-        SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-        [self.view presentScene:titleScene transition:reveal];
-    }
-    else if (_playAgainPressed)
-    {
+        // get touch position
+        CGPoint location = [touch locationInNode:self];
+        //NSLog(@"Touch = (%f, %f)",location.x, location.y);
+        SKNode *node = [self nodeAtPoint:location];
         
-        // Create and configure the scene
-        SKScene * myScene = [[MyScene alloc] initWithSize:self.size];
+
+        if(_mainMenuPressed && [node.name isEqualToString:@"mainMenu"])
+        {
+            // Create and configure the scene
+            SKScene * titleScene = [[TitleScene alloc] initWithSize:self.size];
         
-        SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
-        [self.view presentScene:myScene transition:reveal];
-    }
-    else
-    {
-        _mainMenuPressed = NO;
-        _playAgainPressed = NO;
+            SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+            [self.view presentScene:titleScene transition:reveal];
+        }
+        else if (_playAgainPressed && [node.name isEqualToString:@"playAgain"])
+        {
+        
+            // Create and configure the scene
+            SKScene * myScene = [[MyScene alloc] initWithSize:self.size];
+        
+            SKTransition *reveal = [SKTransition flipHorizontalWithDuration:0.5];
+            [self.view presentScene:myScene transition:reveal];
+        }
+        else
+        {
+            _mainMenuPressed = NO;
+            _playAgainPressed = NO;
+            playAgain.xScale = 1;
+            playAgain.yScale = 1;
+            mainMenu.xScale = 1;
+            mainMenu.yScale = 1;
+        }
     }
 }
 
