@@ -15,6 +15,8 @@
 {
     SKSpriteNode *playAgain;
     SKSpriteNode *mainMenu;
+    SKLabelNode *playAgainText;
+    SKLabelNode *mainMenuText;
     
     BOOL _playAgainPressed;
     BOOL _mainMenuPressed;
@@ -54,7 +56,7 @@
         playAgain.name = @"playAgain";
         [self addChild:playAgain];
         
-        SKLabelNode *playAgainText = [SKLabelNode labelNodeWithFontNamed:@"BudmoJiggler-Regular"];
+        playAgainText = [SKLabelNode labelNodeWithFontNamed:@"BudmoJiggler-Regular"];
         
         playAgainText.text = @"Play Again";
         playAgainText.name = @"playAgain";
@@ -70,7 +72,7 @@
         mainMenu.name = @"mainMenu";
         [self addChild:mainMenu];
         
-        SKLabelNode *mainMenuText = [SKLabelNode labelNodeWithFontNamed:@"BudmoJiggler-Regular"];
+        mainMenuText = [SKLabelNode labelNodeWithFontNamed:@"BudmoJiggler-Regular"];
         
         mainMenuText.text = @"Main Menu";
         mainMenuText.name = @"mainMenu";
@@ -116,6 +118,8 @@
             _playAgainPressed = YES;
             playAgain.xScale = 0.8;
             playAgain.yScale = 0.8;
+            playAgainText.xScale = 0.8;
+            playAgainText.yScale = 0.8;
             
         }
         else if ([node.name isEqualToString:@"mainMenu"]) {
@@ -123,6 +127,9 @@
             _mainMenuPressed = YES;
             mainMenu.xScale = 0.8;
             mainMenu.yScale = 0.8;
+            mainMenuText.xScale = 0.8;
+            mainMenuText.yScale = 0.8;
+            
         }
     }
 }
@@ -133,8 +140,15 @@
     _playAgainPressed = NO;
     playAgain.xScale = 1;
     playAgain.yScale = 1;
+    
+    playAgainText.xScale = 1;
+    playAgainText.yScale = 1;
+    
     mainMenu.xScale = 1;
     mainMenu.yScale = 1;
+    
+    mainMenuText.xScale = 1;
+    mainMenuText.yScale = 1;
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
@@ -171,8 +185,15 @@
             _playAgainPressed = NO;
             playAgain.xScale = 1;
             playAgain.yScale = 1;
+            
+            playAgainText.xScale = 1;
+            playAgainText.yScale = 1;
+            
             mainMenu.xScale = 1;
             mainMenu.yScale = 1;
+            
+            mainMenuText.xScale = 1;
+            mainMenuText.yScale = 1;
         }
     }
 }
