@@ -17,22 +17,31 @@
     
     SKSpriteNode *_overlay;
     SKSpriteNode *_background;
+    
+    // Betting
     SKLabelNode *_betAmount;
     SKSpriteNode *_betIncrease;
     SKSpriteNode *_betDecrease;
     
+    // Winnings
+    SKLabelNode *_amountLeft;
+    SKLabelNode *_latestWin;
     
     AVAudioPlayer *_bgAudio;
     AVAudioPlayer *_bgAudio1;
     AVAudioPlayer *_bgAudio2;
+    AVAudioPlayer *_winAudio;
     
     NSMutableArray *_reelTextures;
     
     double _lastTime;
+    int _flashAmount;
+    int _flasher;
     
     BOOL _leverTouched;
     BOOL _plusButtonTouched;
     BOOL _minusButtonTouched;
+    BOOL _shouldFlash;
 }
 
 -(id)initWithSize:(CGSize)size {    
@@ -47,11 +56,13 @@
         NSURL *bgURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"casino_bg1" ofType:@"mp3"]];
         NSURL *bgURL1 = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"casino_bg2" ofType:@"wav"]];
         NSURL *bgURL2 = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"casino_bg3" ofType:@"wav"]];
+        NSURL *winURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"win1" ofType:@"mp3"]];
         
         // Players
         _bgAudio = [[AVAudioPlayer alloc] initWithContentsOfURL:bgURL error:nil];
         _bgAudio1 = [[AVAudioPlayer alloc] initWithContentsOfURL:bgURL1 error:nil];
         _bgAudio2 = [[AVAudioPlayer alloc] initWithContentsOfURL:bgURL2 error:nil];
+        _winAudio = [[AVAudioPlayer alloc] initWithContentsOfURL:winURL error:nil];
         
         
         // continue setup
@@ -97,8 +108,7 @@
     //add overlay
     [self addChild:_overlay];
     
-    
-    
+    // Betting //
     // Bet Amount
     _betAmount = [SKLabelNode labelNodeWithFontNamed:@"GillSans-Bold"];
     _betAmount.fontSize = 75;
@@ -117,23 +127,23 @@
     _betDecrease.name = @"betMinus";
     [self addChild:_betDecrease];
     
-    //create gameModel
+    // Amount Left
+    _amountLeft = [SKLabelNode labelNodeWithFontNamed:@"GillSans-Bold"];
+    _amountLeft.fontSize = 75;
+    _amountLeft.position = CGPointMake(_overlay.position.x - 100, _overlay.position.y + _overlay.frame.size.height/2 + 30);
+    [self addChild:_amountLeft];
+    
+    // Latest Win
+    _latestWin = [SKLabelNode labelNodeWithFontNamed:@"GillSans-Bold"];
+    _latestWin.fontSize = 75;
+    _latestWin.fontColor = [SKColor greenColor];
+    _latestWin.position = CGPointMake(_overlay.position.x + _overlay.frame.size.width/2, _overlay.position.y + _overlay.frame.size.height/2 + 30);
+    [self addChild:_latestWin];
+    _flasher = 5;
+    
+    // create gameModel
     _gameModel = [[GameModel alloc] init:_overlay.size :_overlay.position];
     [self addChild:_gameModel];
-    
-    
-    
-    // load reel atlas
-    //SKTextureAtlas *reelAtlas = [SKTextureAtlas atlasNamed:@"Reel"];
-    
-    //NSArray *reelTextureNames = [reelAtlas textureNames];
-    //_reelTextures = [NSMutableArray array];
-    
-    //for (NSString *name in reelTextureNames) {
-    //    SKTexture *texture = [reelAtlas textureNamed:name];
-    //    [_reelTextures addObject:texture];
-    //}
-    
     
     // play bgAudio
     // play background music
@@ -242,8 +252,35 @@
     
     [_gameModel updateGameStage:dt];
     
-    // Bet Amound
+    // Bet Amount
     _betAmount.text = [NSString stringWithFormat:@"$%d", _gameModel.bet];
+    
+    // Amount Left
+    _amountLeft.text = [NSString stringWithFormat:@"Total: $%d", _gameModel.amount];
+    
+    // if new round begins, flash winnings
+    if(_gameModel.shouldFlash){
+        _flashAmount = 11;
+        _flasher = 10;
+        _gameModel.shouldFlash = NO;
+        [_winAudio play];
+    }
+    
+    if (_flashAmount > 0) {
+        if (_flasher <=0) {
+            _latestWin.text = [NSString stringWithFormat:@"$%d", _gameModel.winnings];
+            _flashAmount--;
+            _flasher = 10;
+        } else if (_flasher <= 6) {
+            _flasher--;
+            _latestWin.text = [NSString stringWithFormat:@"$%d", _gameModel.winnings];
+        } else {
+            _flasher--;
+            _latestWin.text = @"";
+        }
+    } else {
+        _latestWin.text = @"";
+    }
 }
 
 

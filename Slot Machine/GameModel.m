@@ -12,6 +12,7 @@ static int const kMaxPulls = 5;
 static int const kMinBet = 1;
 static int const kMaxBet = 10;
 static int const kBetIncrement = 1;
+static int const kStartAmount = 99;
 
 @implementation GameModel{
     //private ivars
@@ -81,6 +82,8 @@ static int const kBetIncrement = 1;
     //_spark1.targetNode = self->_overlay;
     //[self addChild:_spark1];
     
+    _amount = kStartAmount;
+    
     return self;
 }
 
@@ -122,19 +125,23 @@ static int const kBetIncrement = 1;
         if([self didWin])
         {
             // calc results
-            CGFloat winnings = [self didWin];
-            _amount += winnings;
-            // display results
-            
+            _winnings = [self didWin];
+            _amount += _winnings;
+            _shouldFlash = YES;
         }
-        // if touch detected, game over
+        
         _gameStage = kGameStagePlayer;
         _pullsLeft--;
         NSLog(@"Pulls Left: %d",_pullsLeft);
-        if(_pullsLeft <= 4)
+        
+        // check if game ended
+        if(_pullsLeft == 0)
         {
-            [self addChild:_spark1];
+            //[self addChild:_spark1];
             [self notifyGameDidEnd];
+        } else {
+            // adjust amount left for bet
+            _amount -= _bet;
         }
         
         
@@ -145,6 +152,7 @@ static int const kBetIncrement = 1;
     [_spark1 removeFromParent];
     _gameStage = kGameStagePlayer;
     _pullsLeft = kMaxPulls;
+    _amount = kStartAmount;
 }
 
 -(void)spinReels
@@ -195,18 +203,24 @@ static int const kBetIncrement = 1;
 -(void)increaseBet{
     // increase bet amount
     _bet += kBetIncrement;
-    // check if incease will move past max amount
+    // check if increase will move past max amount
     if (_bet > kMaxBet) {
         _bet = kMaxBet;
+    } else {
+        // adjust amount
+        _amount -= kBetIncrement;
     }
 }
 
 -(void)decreaseBet{
     // increase bet amount
     _bet -= kBetIncrement;
-    // check if incease will move past max amount
+    // check if decrease will move past max amount
     if (_bet < kMinBet) {
         _bet = kMinBet;
+    } else {
+        // adjust amount
+        _amount += kBetIncrement;
     }
 }
 

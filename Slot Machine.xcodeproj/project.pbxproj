@@ -41,6 +41,7 @@
 		3F65B4FF1915722B00AC931E /* Reel.atlas in Resources */ = {isa = PBXBuildFile; fileRef = 3F65B4FE1915722B00AC931E /* Reel.atlas */; };
 		3FA9EB2119195D9F00C2D587 /* GameModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA9EB2019195D9F00C2D587 /* GameModel.m */; };
 		3FA9EB2419195EB600C2D587 /* Lever.m in Sources */ = {isa = PBXBuildFile; fileRef = 3FA9EB2319195EB600C2D587 /* Lever.m */; };
+		3FD58227192E6EB80032329C /* win1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3FD58226192E6EB80032329C /* win1.mp3 */; };
 		DA4B4475192BDA6B004DBD0A /* budmo jiggler.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DA4B4474192BDA6B004DBD0A /* budmo jiggler.ttf */; };
 		DAF94FF31919425D002BE1B9 /* 7.png in Resources */ = {isa = PBXBuildFile; fileRef = DAF94FEE1919425D002BE1B9 /* 7.png */; };
 		DAF94FF41919425D002BE1B9 /* Bar.png in Resources */ = {isa = PBXBuildFile; fileRef = DAF94FEF1919425D002BE1B9 /* Bar.png */; };
@@ -105,6 +106,7 @@
 		3FA9EB2019195D9F00C2D587 /* GameModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameModel.m; sourceTree = "<group>"; };
 		3FA9EB2219195EB600C2D587 /* Lever.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lever.h; sourceTree = "<group>"; };
 		3FA9EB2319195EB600C2D587 /* Lever.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Lever.m; sourceTree = "<group>"; };
+		3FD58226192E6EB80032329C /* win1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = win1.mp3; sourceTree = "<group>"; };
 		DA4B4474192BDA6B004DBD0A /* budmo jiggler.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "budmo jiggler.ttf"; sourceTree = "<group>"; };
 		DAF94FEE1919425D002BE1B9 /* 7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 7.png; sourceTree = "<group>"; };
 		DAF94FEF1919425D002BE1B9 /* Bar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Bar.png; sourceTree = "<group>"; };
@@ -143,6 +145,7 @@
 		3F22F8381927FA80005E5881 /* Sounds */ = {
 			isa = PBXGroup;
 			children = (
+				3FD58226192E6EB80032329C /* win1.mp3 */,
 				3F22F84119280290005E5881 /* spin1.wav */,
 				3F22F83D1927FF5F005E5881 /* casino_bg2.wav */,
 				3F22F83E1927FF5F005E5881 /* casino_bg3.wav */,
@@ -362,6 +365,7 @@
 				3F65B4FF1915722B00AC931E /* Reel.atlas in Resources */,
 				3F65B4C21915613900AC931E /* InfoPlist.strings in Resources */,
 				DAF94FF51919425D002BE1B9 /* Bell.png in Resources */,
+				3FD58227192E6EB80032329C /* win1.mp3 in Resources */,
 				3F22F83F1927FF5F005E5881 /* casino_bg2.wav in Resources */,
 				DA4B4475192BDA6B004DBD0A /* budmo jiggler.ttf in Resources */,
 				3F22F8491928053B005E5881 /* spark.png in Resources */,

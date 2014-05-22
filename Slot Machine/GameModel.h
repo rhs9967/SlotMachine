@@ -23,6 +23,8 @@ typedef enum : int{
 @property (nonatomic) CGPoint touch;
 @property int amount;
 @property int bet;
+@property int winnings;
+@property BOOL shouldFlash;
 
 -(id)init :(CGSize)size :(CGPoint)pos;
 -(void)updateGameStage : (CGFloat)dt;
